@@ -14,4 +14,8 @@ class MapPage extends Page
     protected static ?string $navigationIcon = 'heroicon-o-map'; // Optional icon
     protected static ?string $navigationLabel = 'خريطة البلاد التونسية'; // Label for navigation
     //protected static ?int $navigationSort = 1; // Sort order in the menu
+    // Disable the title
+    protected static ?string $title = ''; // Or set to null
+    // Use the full layout
+    //protected static string $layout = 'filament::layouts.full'; // Use a full layout
 }
