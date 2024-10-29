@@ -21,7 +21,7 @@ class IconResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-    protected static ?string $navigationLabel = 'أيقونة';
+    protected static ?string $navigationLabel = 'الأيقونات';
 
     protected static ?string $modelLabel = 'أيقونة';
 
