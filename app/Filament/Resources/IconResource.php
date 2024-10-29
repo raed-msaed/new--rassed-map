@@ -12,12 +12,14 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 class IconResource extends Resource
 {
     protected static ?string $model = Icon::class;
 
-    protected static ?string $navigationIcon = 'bx-map';
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
 
     protected static ?string $navigationLabel = 'أيقونة';
 
@@ -33,10 +35,9 @@ class IconResource extends Resource
                     ->label('الإسم')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('path')
+                Forms\Components\FileUpload::make('path')
                     ->label('الملف الصورة')
-                    ->required()
-                    ->maxLength(255),
+                    ->required(),
             ]);
     }
 
@@ -47,7 +48,7 @@ class IconResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('الإسم')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('path')
+                Tables\Columns\ImageColumn::make('path')
                     ->label('الملف الصورة'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('تاريخ الإنشاء')

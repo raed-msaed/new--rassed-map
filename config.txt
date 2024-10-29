@@ -52,3 +52,11 @@ change logo ( 'app\Providers\Filament\AdminPanelProvider.php' )
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('4rem')
             ->favicon(asset('images/logo.png'))
+
+CORS POLICY:
+
+1- $ php artisan config:publish cors
+
+2- config file config/cors.php Line 18    'paths' => ['api/*', 'sanctum/csrf-cookie'] =>  'paths' => ['api/*', 'sanctum/csrf-cookie', '*']
+
+3- install extention CORS pour chrome

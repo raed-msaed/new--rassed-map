@@ -17,9 +17,9 @@ class DataResource extends Resource
 {
     protected static ?string $model = Data::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-map';
+    protected static ?string $navigationIcon = 'bx-map';
 
-    protected static ?string $navigationLabel = 'الخارطة';
+    protected static ?string $navigationLabel = 'متابعة النقاط';
 
     protected static ?string $modelLabel = 'تحديد نقطة';
 

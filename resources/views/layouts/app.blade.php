@@ -1,5 +1,5 @@
 <head>
   <!-- Other head content -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="{{ asset('bootstrapleaflet/css/leaflet.css') }}" /> <!-- Your main CSS -->
+  <script src="{{ asset('bootstrapleaflet/js/leaflet.js') }}"></script> <!-- Your main JS file -->
 </head>

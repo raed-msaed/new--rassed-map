@@ -1,5 +1,11 @@
 <x-filament::page>
-  <div id="map" style="width: 100%; height: 500px;"></div>
+
+  <head>
+    <!-- Other head content -->
+    <link rel="stylesheet" href="{{ asset('bootstrapleaflet/css/leaflet.css') }}" /> <!-- Your main CSS -->
+    <script src="{{ asset('bootstrapleaflet/js/leaflet.js') }}"></script> <!-- Your main JS file -->
+  </head>
+  <div id="map" style="width: 110%; height: 800px;"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
