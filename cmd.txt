@@ -1,0 +1,6 @@
+composer create-project --prefer-dist laravel/laravel rassed-map
+php artisan key:generate
+php artisan make:migration create_names_table
+php artisan migrate:fresh --seed
+composer require filament/filament:"^3.2.52"
+php artisan filament:install --panels
