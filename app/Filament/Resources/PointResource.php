@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DataResource\Pages;
-use App\Filament\Resources\DataResource\RelationManagers;
-use App\Models\Data;
+use App\Filament\Resources\PointResource\Pages;
+use App\Filament\Resources\PointResource\RelationManagers;
+use App\Models\Point;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,23 +12,35 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
 
-class DataResource extends Resource
+class PointResource extends Resource
 {
-    protected static ?string $model = Data::class;
+    protected static ?string $model = Point::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'bx-map';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?string $navigationLabel = 'متابعة النقاط';
+
+    protected static ?string $modelLabel = 'تحديد نقطة';
+
+    protected static ?string $pluralModelLabel = 'قائمة النقاط';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('suivmission_id')
+                Forms\Components\TextInput::make('latitude')
+                    ->default(request()->get('latitude'))
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\TextInput::make('longitude')
+                    ->default(request()->get('longitude'))
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('message')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -38,10 +50,13 @@ class DataResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('suivmission_id')
+                Tables\Columns\TextColumn::make('latitude')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
+                Tables\Columns\TextColumn::make('longitude')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('message')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -76,10 +91,10 @@ class DataResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListData::route('/'),
-            'create' => Pages\CreateData::route('/create'),
-            'view' => Pages\ViewData::route('/{record}'),
-            'edit' => Pages\EditData::route('/{record}/edit'),
+            'index' => Pages\ListPoints::route('/'),
+            'create' => Pages\CreatePoint::route('/create'),
+            'view' => Pages\ViewPoint::route('/{record}'),
+            'edit' => Pages\EditPoint::route('/{record}/edit'),
         ];
     }
 }

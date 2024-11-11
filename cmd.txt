@@ -11,3 +11,4 @@ php artisan vendor:publish --tag=filament-shield-config
 php artisan make:filament-user
 npm install leaflet
 php artisan make:controller MapController
+php artisan make:filament-resource Icon --generate --view

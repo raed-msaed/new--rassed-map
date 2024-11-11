@@ -26,6 +26,8 @@ class SuivmissionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'المهمات المنفذة';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form

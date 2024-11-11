@@ -12,13 +12,14 @@
   @stack('styles') <!-- For additional styles specific to child views -->
 </head>
 
+
 <body>
   <!-- Header -->
 
   <!-- Content -->
-  <div class="container">
+  <div class="fi-layout flex min-h-screen w-full flex-row-reverse overflow-x-clip">
     @yield('content') <!-- Child views will inject their content here -->
-    <div id="map" style="height: 900px;"></div>
+    <div id="map"></div>
   </div>
 
 

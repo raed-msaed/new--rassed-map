@@ -27,6 +27,8 @@ class IconResource extends Resource
 
     protected static ?string $pluralModelLabel = 'الأيقونات';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form

@@ -24,6 +24,8 @@ class MissionResource extends Resource
     protected static ?string $modelLabel = 'مهمة';
 
     protected static ?string $pluralModelLabel = 'المهمات';
+
+    protected static ?int $navigationSort = 3;
     public static function form(Form $form): Form
     {
         return $form
