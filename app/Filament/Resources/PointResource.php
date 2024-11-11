@@ -71,8 +71,9 @@ class PointResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                //Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -93,7 +94,7 @@ class PointResource extends Resource
         return [
             'index' => Pages\ListPoints::route('/'),
             'create' => Pages\CreatePoint::route('/create'),
-            'view' => Pages\ViewPoint::route('/{record}'),
+            //'view' => Pages\ViewPoint::route('/{record}'),
             'edit' => Pages\EditPoint::route('/{record}/edit'),
         ];
     }

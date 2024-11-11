@@ -15,8 +15,8 @@ class Icon extends Model
     protected static function booted()
     {
         static::deleting(function ($icon) {
-            if ($icon->icon_path && Storage::disk('public')->exists($icon->icon_path)) {
-                Storage::disk('public')->delete($icon->icon_path);
+            if ($icon->path) {
+                Storage::delete($icon->path);
             }
         });
     }
