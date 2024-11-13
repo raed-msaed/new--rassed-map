@@ -9,10 +9,17 @@ php artisan storage:link  -> activated public storage
 php artisan make:filament-resource Icon --generate --view
 composer require bezhansalleh/filament-shield
 php artisan vendor:publish --tag=filament-shield-config
+php artisan migrate:fresh --seed
 php artisan make:filament-user
 php artisan shield:install
 npm install leaflet
 php artisan make:controller MapController
+
+----CMD-----
+php artisan migrate:fresh --seed
+php artisan make:filament-user
+php artisan shield:install
+---------
 
 
 

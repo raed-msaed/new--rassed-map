@@ -40,11 +40,15 @@ class PointResource extends Resource
                 Forms\Components\TextInput::make('latitude')
                     ->default(request()->get('latitude'))
                     ->required()
-                    ->numeric(),
+                    ->extraAttributes([
+                        'dir' => 'rtl', // Sets text direction to RTL
+                    ]),
                 Forms\Components\TextInput::make('longitude')
                     ->default(request()->get('longitude'))
                     ->required()
-                    ->numeric(),
+                    ->extraAttributes([
+                        'dir' => 'rtl', // Sets text direction to RTL
+                    ]),
             ]);
     }
 
@@ -56,12 +60,8 @@ class PointResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('latitude')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('longitude')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('latitude'),
+                Tables\Columns\TextColumn::make('longitude'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

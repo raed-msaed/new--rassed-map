@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('icon_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
-
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
     }

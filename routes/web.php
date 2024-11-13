@@ -11,6 +11,6 @@ Route::get('/', function () {
 
 Route::get('/admin/map', [MapController::class, 'index'])->name('admin.map');
 
-Route::get('/api/points', function (Request $request) {
-    return Point::all(); // Or apply filters if needed 
+Route::get('/api/points', function () {
+    return Point::with('icon')->get(); // Ensure the icon relationship is included
 });

@@ -9,6 +9,13 @@
     #map>div.leaflet-control-container>div.leaflet-bottom.leaflet-right>div {
       display: none;
     }
+
+    .leaflet-popup-content {
+      direction: ltr;
+      /* Ensures content is left-to-right */
+      text-align: left;
+      /* Aligns text to the left */
+    }
   </style>
   <div id="map" style="width: 80%; height: 90vh;position: fixed;bottom:5px">
   </div>
@@ -26,36 +33,43 @@
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
 
-      // Function to select icon based on point type
-      function getIcon(type) {
-        // Construct the path to the icon in the public storage directory
-        let iconUrl = `/storage/icons/${type}.png`; // e.g., /storage/icons/type1.png
 
-        return L.icon({
-          iconUrl: iconUrl,
-          iconSize: [32, 32],
-          iconAnchor: [16, 32],
-          popupAnchor: [0, -32]
-        });
+      // Convert decimal degrees to DMS format
+      function decimalToDMS(degrees) {
+        var d = Math.floor(degrees); // Degrees
+        var minFloat = (degrees - d) * 60; // Minutes as float
+        var m = Math.floor(minFloat); // Minutes
+        var s = ((minFloat - m) * 60).toFixed(2); // Seconds (2 decimals)
+
+        return d + "° " + m + "' " + s + "\""; // Return DMS string
       }
+
       // Fetch points from the API and add them as markers
       fetch('/api/points')
         .then(response => response.json())
         .then(data => {
           data.forEach(point => {
+            // Convert the latitude and longitude to DMS format
+            var latDMS = decimalToDMS(point.latitude);
+            var lngDMS = decimalToDMS(point.longitude);
+            var iconUrl = `${window.location.origin}/storage/${point.icon.path}`;
+            var customIcon = L.icon({
+              iconUrl: iconUrl, // Use the iconPath from the API response
+              iconSize: [32, 32],
+              iconAnchor: [16, 32],
+              popupAnchor: [0, -32]
+            });
 
-            // Use getIcon function to choose the correct icon for each point
-            var markerIcon = getIcon(point.iconType);
             // Create a marker for each point
             var marker = L.marker([point.latitude, point.longitude], {
-              icon: markerIcon
+              icon: customIcon
             }).addTo(map);
 
             // Optional: Add a popup with point details
             marker.bindPopup(`
-              <strong>الرمز:</strong> ${point.message}<br>
-              <strong>Latitude:</strong> ${point.latitude}<br>
-              <strong>Longitude:</strong> ${point.longitude}<br>
+              <strong>Title:</strong> ${point.title}<br>
+              <strong>Latitude:</strong> ${latDMS}<br>
+              <strong>Longitude:</strong> ${lngDMS}<br>
               <a href="/admin/points/${point.id}/edit">تحيين النقطة الدالة</a>
             `);
           });
@@ -71,16 +85,20 @@
       // Add a click event listener to the map
       map.on('click', function(e) {
         // Get the clicked coordinates
-        var lat = e.latlng.lat.toFixed(5);
-        var lng = e.latlng.lng.toFixed(5);
-
+        var latDD = e.latlng.lat.toFixed(5);
+        var lngDD = e.latlng.lng.toFixed(5);
+        var latDMS = decimalToDMS(latDD);
+        var lngDMS = decimalToDMS(lngDD);
+        // Assuming `lat` and `lng` contain the DMS formatted latitude and longitude as strings
+        var encodedLatitude = encodeURIComponent(latDMS);
+        var encodedLongitude = encodeURIComponent(lngDMS);
         // Construct a URL for your Point resource
-        var createUrl = `/admin/points/create?latitude=${lat}&longitude=${lng}`;
+        var createUrl = `/admin/points/create?latitude=${encodedLatitude}&longitude=${encodedLongitude}`;
 
         // Create popup content with a link to the Filament resource
         var popupContent = `
-                    <strong>الإحداثيات:</strong> ${lat}, ${lng}<br>
-                    <a href="${createUrl}">إضافة نقطة دالة</a>
+                    <strong>coordinates:</strong><br>${latDMS},${lngDMS}<br>
+                    <a href="${createUrl}">Add Cordinates</a>
                 `;
 
         // Show popup at the clicked location
