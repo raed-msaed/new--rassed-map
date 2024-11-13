@@ -5,7 +5,13 @@
     <link rel="stylesheet" href="{{ asset('bootstrapleaflet/css/leaflet.css') }}" /> <!-- Your main CSS -->
     <script src="{{ asset('bootstrapleaflet/js/leaflet.js') }}"></script> <!-- Your main JS file -->
   </head>
-  <div id="map" style="width: 100%; height: 100vh;"></div>
+  <style>
+    #map>div.leaflet-control-container>div.leaflet-bottom.leaflet-right>div {
+      display: none;
+    }
+  </style>
+  <div id="map" style="width: 80%; height: 90vh;position: fixed;bottom:5px">
+  </div>
   <div id="coordinates"
     style="position: fixed; bottom: 10px; left: 10px; background: rgba(255, 255, 255, 0.8); padding: 5px; border-radius: 5px;">
     <strong>Coordinates:</strong> <span id="lat"></span>, <span id="lng"></span>
@@ -37,11 +43,13 @@
         .then(response => response.json())
         .then(data => {
           data.forEach(point => {
-          
+
             // Use getIcon function to choose the correct icon for each point
-            var markerIcon = getIcon(point.iconType);  
+            var markerIcon = getIcon(point.iconType);
             // Create a marker for each point
-            var marker = L.marker([point.latitude, point.longitude], { icon: markerIcon }).addTo(map);
+            var marker = L.marker([point.latitude, point.longitude], {
+              icon: markerIcon
+            }).addTo(map);
 
             // Optional: Add a popup with point details
             marker.bindPopup(`

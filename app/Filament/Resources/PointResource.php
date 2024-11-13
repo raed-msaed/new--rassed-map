@@ -12,7 +12,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextInput;
 
 class PointResource extends Resource
 {
@@ -20,11 +19,11 @@ class PointResource extends Resource
 
     protected static ?string $navigationIcon = 'bx-map';
 
-    protected static ?string $navigationLabel = 'متابعة النقاط';
+    protected static ?string $navigationLabel = 'متابعة النقاط الدالة';
 
-    protected static ?string $modelLabel = 'تحديد نقطة';
+    protected static ?string $modelLabel = 'نقطة دالة';
 
-    protected static ?string $pluralModelLabel = 'قائمة النقاط';
+    protected static ?string $pluralModelLabel = 'قائمة النقاط الدالة';
 
     protected static ?int $navigationSort = 1;
 
@@ -32,6 +31,12 @@ class PointResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('icon_id')
+                    ->required()
+                    ->relationship('icon', 'name'),
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('latitude')
                     ->default(request()->get('latitude'))
                     ->required()
@@ -40,9 +45,6 @@ class PointResource extends Resource
                     ->default(request()->get('longitude'))
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('message')
-                    ->required()
-                    ->maxLength(255),
             ]);
     }
 
@@ -50,14 +52,16 @@ class PointResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('icon.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('longitude')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('message')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -71,9 +75,8 @@ class PointResource extends Resource
                 //
             ])
             ->actions([
-                //Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -94,7 +97,7 @@ class PointResource extends Resource
         return [
             'index' => Pages\ListPoints::route('/'),
             'create' => Pages\CreatePoint::route('/create'),
-            //'view' => Pages\ViewPoint::route('/{record}'),
+            'view' => Pages\ViewPoint::route('/{record}'),
             'edit' => Pages\EditPoint::route('/{record}/edit'),
         ];
     }

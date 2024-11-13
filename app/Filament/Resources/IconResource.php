@@ -39,6 +39,7 @@ class IconResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('path')
                     ->label('الملف الصورة')
+                    ->directory('icons')  // Specify the storage directory
                     ->required(),
             ]);
     }
