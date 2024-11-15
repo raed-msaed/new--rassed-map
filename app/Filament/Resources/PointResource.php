@@ -32,23 +32,31 @@ class PointResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('icon_id')
-                    ->required()
-                    ->relationship('icon', 'name'),
+                    ->relationship('icon', 'name')
+                    ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('latitude_dms')
+                    ->default(request()->get('latitude_dms'))
+                    ->required()
+                    ->extraInputAttributes(['style' => 'text-align:right'])
+                    ->extraAttributes(['dir' => 'ltr']),
+                Forms\Components\TextInput::make('longitude_dms')
+                    ->default(request()->get('longitude_dms'))
+                    ->required()
+                    ->extraInputAttributes(['style' => 'text-align:right'])
+                    ->extraAttributes(['dir' => 'ltr']),
                 Forms\Components\TextInput::make('latitude')
                     ->default(request()->get('latitude'))
                     ->required()
-                    ->extraAttributes([
-                        'dir' => 'rtl', // Sets text direction to RTL
-                    ]),
+                    ->extraInputAttributes(['style' => 'text-align:right'])
+                    ->extraAttributes(['dir' => 'ltr']),
                 Forms\Components\TextInput::make('longitude')
                     ->default(request()->get('longitude'))
                     ->required()
-                    ->extraAttributes([
-                        'dir' => 'rtl', // Sets text direction to RTL
-                    ]),
+                    ->extraInputAttributes(['style' => 'text-align:right'])
+                    ->extraAttributes(['dir' => 'ltr']),
             ]);
     }
 
@@ -57,11 +65,20 @@ class PointResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('icon.name')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('latitude'),
-                Tables\Columns\TextColumn::make('longitude'),
+                Tables\Columns\TextColumn::make('latitude_dms')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('longitude_dms')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('latitude')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('longitude')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

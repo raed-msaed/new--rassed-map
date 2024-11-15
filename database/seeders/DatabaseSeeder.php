@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorygradeSeeder::class);
         $this->call(GradeSeeder::class);
         $this->call(OrganisationSeeder::class);
+        $this->call(IconSeeder::class);
     }
 }

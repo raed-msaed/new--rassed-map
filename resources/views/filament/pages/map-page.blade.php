@@ -35,13 +35,27 @@
 
 
       // Convert decimal degrees to DMS format
-      function decimalToDMS(degrees) {
-        var d = Math.floor(degrees); // Degrees
-        var minFloat = (degrees - d) * 60; // Minutes as float
-        var m = Math.floor(minFloat); // Minutes
-        var s = ((minFloat - m) * 60).toFixed(2); // Seconds (2 decimals)
+      function toDMS(lat, lng) {
+        function convertToDMS(value) {
+          const degrees = Math.floor(value);
+          const minutes = Math.floor((value - degrees) * 60);
+          const seconds = ((value - degrees - minutes / 60) * 3600).toFixed(2);
+          return `${degrees}° ${minutes}' ${seconds}"`;
+        }
 
-        return d + "° " + m + "' " + s + "\""; // Return DMS string
+        return {
+          latitude: convertToDMS(Math.abs(lat)) + (lat >= 0 ? ' N' : ' S'),
+          longitude: convertToDMS(Math.abs(lng)) + (lng >= 0 ? ' E' : ' W'),
+        };
+      }
+
+      // Convert DMS to decimal degrees format
+      function toDecimal(degrees, minutes, seconds, direction) {
+        let decimal = degrees + minutes / 60 + seconds / 3600;
+        if (direction === 'S' || direction === 'W') {
+          decimal = -decimal;
+        }
+        return decimal;
       }
 
       // Fetch points from the API and add them as markers
@@ -50,8 +64,8 @@
         .then(data => {
           data.forEach(point => {
             // Convert the latitude and longitude to DMS format
-            var latDMS = decimalToDMS(point.latitude);
-            var lngDMS = decimalToDMS(point.longitude);
+            const dms = toDMS(point.latitude, point.longitude);
+
             var iconUrl = `${window.location.origin}/storage/${point.icon.path}`;
             var customIcon = L.icon({
               iconUrl: iconUrl, // Use the iconPath from the API response
@@ -68,8 +82,8 @@
             // Optional: Add a popup with point details
             marker.bindPopup(`
               <strong>Title:</strong> ${point.title}<br>
-              <strong>Latitude:</strong> ${latDMS}<br>
-              <strong>Longitude:</strong> ${lngDMS}<br>
+              <strong>Latitude:</strong> ${dms.latitude}<br>
+              <strong>Longitude:</strong> ${dms.longitude}<br>
               <a href="/admin/points/${point.id}/edit">تحيين النقطة الدالة</a>
             `);
           });
@@ -90,8 +104,8 @@
         var latDMS = decimalToDMS(latDD);
         var lngDMS = decimalToDMS(lngDD);
         // Assuming `lat` and `lng` contain the DMS formatted latitude and longitude as strings
-        var encodedLatitude = encodeURIComponent(latDMS);
-        var encodedLongitude = encodeURIComponent(lngDMS);
+        //  var encodedLatitude = encodeURIComponent(latDMS);
+        //  var encodedLongitude = encodeURIComponent(lngDMS);
         // Construct a URL for your Point resource
         var createUrl = `/admin/points/create?latitude=${encodedLatitude}&longitude=${encodedLongitude}`;
 
