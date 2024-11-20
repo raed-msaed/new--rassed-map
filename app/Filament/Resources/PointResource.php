@@ -25,24 +25,32 @@ class PointResource extends Resource
 
     protected static ?string $pluralModelLabel = 'قائمة النقاط الدالة';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('icon_id')
+                    ->label('ع/ر')
                     ->relationship('icon', 'name')
                     ->required(),
+                Forms\Components\Select::make('mission_id')
+                    ->label('المهمة')
+                    ->relationship('mission', 'id')
+                    ->required(),
                 Forms\Components\TextInput::make('title')
+                    ->label('الإسم')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('latitude')
+                    ->label('خط الطول')
                     ->default(request()->get('latitude'))
                     ->required()
                     ->extraInputAttributes(['style' => 'text-align:right'])
                     ->extraAttributes(['dir' => 'ltr']),
                 Forms\Components\TextInput::make('longitude')
+                    ->label('خط العرض')
                     ->default(request()->get('longitude'))
                     ->required()
                     ->extraInputAttributes(['style' => 'text-align:right'])
@@ -55,6 +63,9 @@ class PointResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('icon.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('mission.id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')

@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->id();
             $table->foreignId('icon_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('mission_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            //$table->string('latitude_dms');
-            //$table->string('longitude_dms');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->timestamps();

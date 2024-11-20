@@ -26,27 +26,48 @@ class SuivmissionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'المهمات المنفذة';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('mission_id')
-                    ->numeric()
+                Forms\Components\Select::make('mission_id')
+                    ->relationship('mission', 'id')
                     ->default(null),
-                Forms\Components\DateTimePicker::make('datedebut'),
-                Forms\Components\DateTimePicker::make('datefin'),
+                Forms\Components\DateTimePicker::make('datedebut')
+                    ->label('تاريخ بداية التنفيذ'),
+                Forms\Components\DateTimePicker::make('datefin')
+                    ->label('تاريخ نهاية التنفيذ'),
                 Forms\Components\TextInput::make('moyenne')
+                    ->label('الوسيلة')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('dms')
-                    ->maxLength(255)
+                Forms\Components\TextInput::make('point_id')
+                    ->label('الإحداثية')
                     ->default(null),
                 Forms\Components\TextInput::make('descriptionpoint')
+                    ->label('وصف النقطة')
                     ->maxLength(255)
                     ->default(null),
                 Forms\Components\TextInput::make('reconnaissance')
+                    ->label('الإستطلاع')
+                    ->maxLength(255)
+                    ->default(null),
+                Forms\Components\TextInput::make('descriptionphoto')
+                    ->label('وصف الصورة')
+                    ->maxLength(255)
+                    ->default(null),
+                Forms\Components\TextInput::make('photoaerienne')
+                    ->label('الصورة الجوية')
+                    ->maxLength(255)
+                    ->default(null),
+                Forms\Components\TextInput::make('photogeoaerienne')
+                    ->label('الصورة الجيوفضائية')
+                    ->maxLength(255)
+                    ->default(null),
+                Forms\Components\TextInput::make('video')
+                    ->label('الفيديو')
                     ->maxLength(255)
                     ->default(null),
             ]);
@@ -56,7 +77,7 @@ class SuivmissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('mission_id')
+                Tables\Columns\TextColumn::make('mission.id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datedebut')
@@ -67,11 +88,20 @@ class SuivmissionResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('moyenne')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('dms')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('point_id')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('descriptionpoint')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('reconnaissance')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('descriptionphoto')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('photoaerienne')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('photogeoaerienne')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('video')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

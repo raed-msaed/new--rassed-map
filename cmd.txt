@@ -23,3 +23,4 @@ php artisan shield:install
 php artisan make:filament-resource Icon --generate --view
 
 
+php artisan migrate:rollback

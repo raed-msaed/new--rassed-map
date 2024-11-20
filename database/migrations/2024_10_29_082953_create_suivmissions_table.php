@@ -17,9 +17,13 @@ return new class extends Migration
             $table->dateTime('datedebut')->nullable();
             $table->dateTime('datefin')->nullable();
             $table->string('moyenne')->nullable();
-            $table->string('dms')->nullable();
+            $table->foreignId('point_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('descriptionpoint')->nullable();
             $table->string('reconnaissance')->nullable();
+            $table->string('descriptionphoto')->nullable();
+            $table->string('photoaerienne')->nullable();
+            $table->string('photogeoaerienne')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
         });
     }
