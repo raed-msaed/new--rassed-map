@@ -20,6 +20,6 @@ php artisan migrate:fresh --seed
 php artisan make:filament-user
 php artisan shield:install
 ---------
-
+php artisan make:filament-resource Icon --generate --view
 
 

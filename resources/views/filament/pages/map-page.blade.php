@@ -33,30 +33,39 @@
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
 
+      // Convert decimal degrees to DMS format
+      function decimalToDMS(degrees) {
+        var d = Math.floor(degrees); // Degrees
+        var minFloat = (degrees - d) * 60; // Minutes as float
+        var m = Math.floor(minFloat); // Minutes
+        var s = ((minFloat - m) * 60).toFixed(2); // Seconds (2 decimals)
+
+        return d + "° " + m + "' " + s + "\""; // Return DMS string
+      }
 
       // Convert decimal degrees to DMS format
-      function toDMS(lat, lng) {
-        function convertToDMS(value) {
-          const degrees = Math.floor(value);
-          const minutes = Math.floor((value - degrees) * 60);
-          const seconds = ((value - degrees - minutes / 60) * 3600).toFixed(2);
-          return `${degrees}° ${minutes}' ${seconds}"`;
-        }
+      // function toDMS(lat, lng) {
+      //   function convertToDMS(value) {
+      //     const degrees = Math.floor(value);
+      //     const minutes = Math.floor((value - degrees) * 60);
+      //     const seconds = ((value - degrees - minutes / 60) * 3600).toFixed(2);
+      //     return `${degrees}° ${minutes}' ${seconds}"`;
+      //   }
 
-        return {
-          latitude: convertToDMS(Math.abs(lat)) + (lat >= 0 ? ' N' : ' S'),
-          longitude: convertToDMS(Math.abs(lng)) + (lng >= 0 ? ' E' : ' W'),
-        };
-      }
+      //   return {
+      //     latitude: convertToDMS(Math.abs(lat)) + (lat >= 0 ? ' N' : ' S'),
+      //     longitude: convertToDMS(Math.abs(lng)) + (lng >= 0 ? ' E' : ' W'),
+      //   };
+      // }
 
       // Convert DMS to decimal degrees format
-      function toDecimal(degrees, minutes, seconds, direction) {
-        let decimal = degrees + minutes / 60 + seconds / 3600;
-        if (direction === 'S' || direction === 'W') {
-          decimal = -decimal;
-        }
-        return decimal;
-      }
+      // function toDecimal(degrees, minutes, seconds, direction) {
+      //   let decimal = degrees + minutes / 60 + seconds / 3600;
+      //   if (direction === 'S' || direction === 'W') {
+      //     decimal = -decimal;
+      //   }
+      //   return decimal;
+      // }
 
       // Fetch points from the API and add them as markers
       fetch('/api/points')
@@ -64,7 +73,10 @@
         .then(data => {
           data.forEach(point => {
             // Convert the latitude and longitude to DMS format
-            const dms = toDMS(point.latitude, point.longitude);
+            // const dms = toDMS(point.latitude, point.longitude);
+
+            var latDMS = decimalToDMS(point.latitude);
+            var lngDMS = decimalToDMS(point.longitude);
 
             var iconUrl = `${window.location.origin}/storage/${point.icon.path}`;
             var customIcon = L.icon({
@@ -82,8 +94,8 @@
             // Optional: Add a popup with point details
             marker.bindPopup(`
               <strong>Title:</strong> ${point.title}<br>
-              <strong>Latitude:</strong> ${dms.latitude}<br>
-              <strong>Longitude:</strong> ${dms.longitude}<br>
+               <strong>Latitude:</strong> ${latDMS}<br>
+              <strong>Longitude:</strong> ${lngDMS}<br>
               <a href="/admin/points/${point.id}/edit">تحيين النقطة الدالة</a>
             `);
           });
@@ -99,23 +111,36 @@
       // Add a click event listener to the map
       map.on('click', function(e) {
         // Get the clicked coordinates
+        // const latDD = e.latlng.lat;
+        // const lngDD = e.latlng.lng;
+
+        // const latDMS = toDMS(Math.abs(latDD)) + (latDD >= 0 ? ' N' : ' S');
+        // const lngDMS = toDMS(Math.abs(lngDD)) + (lngDD >= 0 ? ' E' : ' W');
         var latDD = e.latlng.lat.toFixed(5);
         var lngDD = e.latlng.lng.toFixed(5);
-        var latDMS = decimalToDMS(latDD);
-        var lngDMS = decimalToDMS(lngDD);
+        //  var latDMS = decimalToDMS(latDD);
+        //  var lngDMS = decimalToDMS(lngDD);
+
         // Assuming `lat` and `lng` contain the DMS formatted latitude and longitude as strings
         //  var encodedLatitude = encodeURIComponent(latDMS);
         //  var encodedLongitude = encodeURIComponent(lngDMS);
         // Construct a URL for your Point resource
-        var createUrl = `/admin/points/create?latitude=${encodedLatitude}&longitude=${encodedLongitude}`;
+        var createUrl = `/admin/points/create?latitude=${latDD}&longitude=${lngDD}`;
 
         // Create popup content with a link to the Filament resource
         var popupContent = `
-                    <strong>coordinates:</strong><br>${latDMS},${lngDMS}<br>
+                    <strong>coordinates:</strong><br>${latDD},${lngDD}<br>
                     <a href="${createUrl}">Add Cordinates</a>
                 `;
-
-        // Show popup at the clicked location
+        // Display the coordinates in a popup
+        // var popupContent = `
+      //         <strong>Coordinates:</strong><br>
+      //         Decimal Degrees:<br>
+      //         Latitude: ${latDD.toFixed(8)}, Longitude: ${lngDD.toFixed(8)}<br>
+      //         DMS:<br>
+      //         Latitude: ${latDMS}, Longitude: ${lngDMS}<br>
+      //         <button onclick="savePoint(${latDD}, ${lngDD}, '${latDMS}', '${lngDMS}')">Save Point</button>
+      //     `;
         L.popup()
           .setLatLng(e.latlng)
           .setContent(popupContent)
