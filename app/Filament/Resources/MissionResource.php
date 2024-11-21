@@ -32,27 +32,36 @@ class MissionResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('refmission')
+                    ->label('رمز المهمة')
+                    ->maxLength(255)
+                    ->default(null),
                 Forms\Components\TextInput::make('refdemande')
                     ->label('مرجع الطلب')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('datedemande')
                     ->label('تاريخ المطلب')
+                    ->extraInputAttributes(['style' => 'text-align:right'])
+                    ->native(false)
+                    ->displayFormat('Y/m/d')
                     ->required(),
                 Forms\Components\Select::make('organisation_id')
                     ->label('الجهة')
                     ->relationship('organisation', 'name')
                     ->required(),
                 Forms\Components\DatePicker::make('datedebutmission')
+                    ->extraInputAttributes(['style' => 'text-align:right'])
+                    ->native(false)
+                    ->displayFormat('Y/m/d')
                     ->label('تاريخ بداية المهمة'),
                 Forms\Components\DatePicker::make('datefinmission')
+                    ->extraInputAttributes(['style' => 'text-align:right'])
+                    ->native(false)
+                    ->displayFormat('Y/m/d')
                     ->label('تاريخ نهاية المهمة'),
                 Forms\Components\TextInput::make('timemission')
                     ->label('التوقيت')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('refmission')
-                    ->label('رمز المهمة')
                     ->maxLength(255)
                     ->default(null),
                 Forms\Components\TextInput::make('type_mission')
@@ -75,14 +84,13 @@ class MissionResource extends Resource
                     ->label('المؤشرات')
                     ->maxLength(255)
                     ->default(null),
-
                 Radio::make('accordgrci')
                     ->label('مصادقة مركز الإستطلاع')
                     ->options([
                         'نعم' => 'نعم',
                         'لا' => 'لا',
                     ]),
-                Forms\Components\Select::make('organisationaccord')
+                Forms\Components\Select::make('organisationaccord_id')
                     ->label('الجهة المصادقة')
                     ->relationship('organisationaccord', 'name')
                     ->required(),
@@ -103,6 +111,9 @@ class MissionResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('refmission')
+                    ->label('رمز المهمة')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('refdemande')
                     ->label('مرجع الطلب')
                     ->searchable(),
@@ -124,9 +135,6 @@ class MissionResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('timemission')
                     ->label('التوقيت')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('refmission')
-                    ->label('رمز المهمة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type_mission')
                     ->label('صنف المهمة')
@@ -163,7 +171,7 @@ class MissionResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 //
             ])

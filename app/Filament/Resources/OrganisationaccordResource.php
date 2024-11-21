@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\IconResource\Pages;
-use App\Filament\Resources\IconResource\RelationManagers;
-use App\Models\Icon;
+use App\Filament\Resources\OrganisationaccordResource\Pages;
+use App\Filament\Resources\OrganisationaccordResource\RelationManagers;
+use App\Models\Organisationaccord;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,37 +12,32 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 
-class IconResource extends Resource
+class OrganisationaccordResource extends Resource
 {
-    protected static ?string $model = Icon::class;
+    protected static ?string $model = Organisationaccord::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static ?string $navigationIcon = 'heroicon-o-shield-exclamation';
 
-    protected static ?string $navigationLabel = 'الأيقونات';
+    protected static ?string $navigationLabel = 'الجهة المصادقة';
 
-    protected static ?string $modelLabel = 'أيقونة';
+    protected static ?string $modelLabel = 'الجهة';
 
-    protected static ?string $pluralModelLabel = 'الأيقونات';
+    protected static ?string $pluralModelLabel = 'قائمة الجهات';
 
     protected static ?string $navigationGroup = 'الإعدادات';
-
-    //protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('الإسم')
+                    ->label('إسم الجهة')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('path')
-                    ->label('الصورة')
-                    ->directory('icons')  // Specify the storage directory
-                    ->required(),
             ]);
     }
 
@@ -51,10 +46,8 @@ class IconResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('الإسم')
+                    ->label('إسم الجهة')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('path')
-                    ->label('الصورة'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('تاريخ الإنشاء')
                     ->dateTime()
@@ -80,18 +73,21 @@ class IconResource extends Resource
             ]);
     }
 
-    /*  public static function Infolist(Infolist $infolist): Infolist
+    public static function Infolist(Infolist $infolist): Infolist
     {
         return $infolist
             ->schema([
                 Section::make('')
                     ->schema([
-                        TextEntry::make('name')->label('الإسم'),
-                        FileUpload::make('path')->label('صورة'),
-
+                        TextEntry::make('name')
+                            ->label('إسم الجهة'),
+                        /*TextEntry::make('employees_count')
+                            ->state(function (Model $record): int {
+                                return $record->employees()->count();
+                            }),*/
                     ])
             ]);
-    }*/
+    }
 
     public static function getRelations(): array
     {
@@ -103,10 +99,10 @@ class IconResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListIcons::route('/'),
-            'create' => Pages\CreateIcon::route('/create'),
-            //   'view' => Pages\ViewIcon::route('/{record}'),
-            'edit' => Pages\EditIcon::route('/{record}/edit'),
+            'index' => Pages\ListOrganisationaccords::route('/'),
+            'create' => Pages\CreateOrganisationaccord::route('/create'),
+            //   'view' => Pages\ViewOrganisationaccord::route('/{record}'),
+            'edit' => Pages\EditOrganisationaccord::route('/{record}/edit'),
         ];
     }
 }

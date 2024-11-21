@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('zone')->nullable();
             $table->string('besoinrenseignement')->nullable();
             $table->string('accordgrci')->nullable();
-            $table->foreignId('organisationaccord')->nullable()->constrained('organisations', 'id')->cascadeOnDelete();
+            $table->foreignId('organisationaccord_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('signe')->nullable();
             $table->string('statusaccord')->nullable();
             $table->string('remarqueaccord')->nullable();

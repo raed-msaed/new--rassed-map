@@ -25,22 +25,20 @@ class PointResource extends Resource
 
     protected static ?string $pluralModelLabel = 'قائمة النقاط الدالة';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('icon_id')
-                    ->label('ع/ر')
-                    ->relationship('icon', 'name')
-                    ->required(),
                 Forms\Components\Select::make('mission_id')
                     ->label('المهمة')
-                    ->relationship('mission', 'id')
+                    ->relationship('mission', 'refmission')
+                    ->searchable() // Makes the field searchable
+                    ->preload()
                     ->required(),
                 Forms\Components\TextInput::make('title')
-                    ->label('الإسم')
+                    ->label('إسم النقطة')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('latitude')
@@ -55,6 +53,10 @@ class PointResource extends Resource
                     ->required()
                     ->extraInputAttributes(['style' => 'text-align:right'])
                     ->extraAttributes(['dir' => 'ltr']),
+                Forms\Components\Select::make('icon_id')
+                    ->label('الأيقونة')
+                    ->relationship('icon', 'name')
+                    ->required(),
             ]);
     }
 
@@ -62,19 +64,23 @@ class PointResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('icon.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('mission.id')
+                Tables\Columns\TextColumn::make('mission.refmission')
+                    ->label('المهمة')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('إسم النقطة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
+                    ->label('خط الطول')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('longitude')
+                    ->label('خط العرض')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\ImageColumn::make('icon.path')
+                    ->label('الأيقونة')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -84,7 +90,7 @@ class PointResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 //
             ])

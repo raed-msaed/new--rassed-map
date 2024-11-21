@@ -15,11 +15,11 @@ class Suivmission extends Model
 
     public function mission(): BelongsTo
     {
-        return $this->belongsTo(Suivmission::class);
+        return $this->belongsTo(Mission::class)->orderBy('id', 'desc');
     }
 
-    public function point(): HasMany
+    public function point(): BelongsTo
     {
-        return $this->hasMany(Point::class);
+        return $this->belongsTo(Point::class)->orderBy('id', 'desc');
     }
 }

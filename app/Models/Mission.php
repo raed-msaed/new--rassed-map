@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Mission extends Model
 {
@@ -20,16 +21,16 @@ class Mission extends Model
 
     public function suivmission(): HasMany
     {
-        return $this->hasMany(Suivmission::class);
+        return $this->hasMany(Suivmission::class); 
     }
 
-    public function organisation()
+    public function organisation(): BelongsTo
     {
-        return $this->belongsTo(Organisation::class, 'organisation_id');
+        return $this->belongsTo(Organisation::class);
     }
 
-    public function organisationaccord()
+    public function organisationaccord(): BelongsTo
     {
-        return $this->belongsTo(Organisation::class, 'organisationaccord');
+        return $this->belongsTo(Organisationaccord::class);
     }
 }

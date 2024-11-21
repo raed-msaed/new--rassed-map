@@ -19,15 +19,16 @@ class CategorygradeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'الإعدادات';
-
     protected static ?string $navigationLabel = 'أصناف الرتب';
 
     protected static ?string $modelLabel = 'الصنف';
 
     protected static ?string $pluralModelLabel = 'التصنيف';
 
-    protected static ?int $navigationSort = 1;
+   // protected static ?int $navigationSort = 1;
+    
+    protected static ?string $navigationGroup = 'تسيير';
+
 
     public static function form(Form $form): Form
     {

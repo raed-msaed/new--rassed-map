@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GradeSeeder::class);
         $this->call(OrganisationSeeder::class);
         $this->call(IconSeeder::class);
+        $this->call(OrganisationaccordSeeder::class);
     }
 }

@@ -22,15 +22,15 @@ class GradeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'الإعدادات';
-
     protected static ?string $navigationLabel = 'الرتبة';
 
     protected static ?string $modelLabel = 'رتبة عسكرية';
 
     protected static ?string $pluralModelLabel = 'قائمة الرتب العسكرية';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationGroup = 'تسيير';
+
+    //    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
