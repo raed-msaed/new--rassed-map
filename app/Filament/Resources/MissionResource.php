@@ -4,6 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MissionResource\Pages;
 use App\Filament\Resources\MissionResource\RelationManagers;
+use App\Filament\Resources\MissionResource\RelationManagers\PointsRelationManager;
+use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionRelationManager;
+use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionsRelationManager;
 use App\Models\Mission;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -189,7 +192,8 @@ class MissionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PointsRelationManager::class,
+            SuivmissionRelationManager::class
         ];
     }
 
