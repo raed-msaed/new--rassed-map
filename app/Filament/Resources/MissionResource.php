@@ -7,6 +7,7 @@ use App\Filament\Resources\MissionResource\RelationManagers;
 use App\Filament\Resources\MissionResource\RelationManagers\PointsRelationManager;
 use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionRelationManager;
 use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionsRelationManager;
+use App\Filament\Resources\MissionResource\Widgets\MissionStats;
 use App\Models\Mission;
 use Filament\Forms;
 use Filament\Forms\Form;

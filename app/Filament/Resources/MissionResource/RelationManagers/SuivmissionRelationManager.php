@@ -137,7 +137,6 @@ class SuivmissionRelationManager extends RelationManager
                     ->label('الصورة الجيوفضائية'),
                 Tables\Columns\TextColumn::make('video')
                     ->label('الفيديو')
-                    ->label('Video')
                     ->formatStateUsing(fn ($state) => $state ? '<a href="' . Storage::url($state) . '" target="_blank" style="font-weight: bold;color: #007bff;">مشاهدة</a>' : 'لا يوجد')
                     ->html(),
                 Tables\Columns\TextColumn::make('created_at')
