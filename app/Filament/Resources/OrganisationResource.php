@@ -20,7 +20,7 @@ class OrganisationResource extends Resource
 {
     protected static ?string $model = Organisation::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shield-exclamation';
+    protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
     protected static ?string $navigationLabel = 'جهة الإنتماء';
 

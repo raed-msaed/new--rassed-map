@@ -22,7 +22,7 @@ class GradeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'الرتبة';
+    protected static ?string $navigationLabel = 'الرتب';
 
     protected static ?string $modelLabel = 'رتبة عسكرية';
 

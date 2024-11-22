@@ -20,7 +20,7 @@ class OrganisationaccordResource extends Resource
 {
     protected static ?string $model = Organisationaccord::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shield-exclamation';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
     protected static ?string $navigationLabel = 'الجهة المصادقة';
 

@@ -23,8 +23,7 @@ class SuivmissionResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-plane-circle-check';
 
-
-    protected static ?string $navigationLabel = 'متابعة برنامج المهام';
+    protected static ?string $navigationLabel = 'متابعة برنامج المهام المنفذة';
 
     protected static ?string $modelLabel = 'تنفيذ مهمة';
 
@@ -145,10 +144,12 @@ class SuivmissionResource extends Resource
                     ->formatStateUsing(fn ($state) => $state ? '<a href="' . Storage::url($state) . '" target="_blank" style="font-weight: bold;color: #007bff;">مشاهدة</a>' : 'لا يوجد')
                     ->html(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('تاريخ الإنشاء')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('تاريخ التعديل')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
