@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\MissionResource\RelationManagers;
+namespace App\Filament\Resources\MissionValidResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -96,7 +96,6 @@ class PointsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

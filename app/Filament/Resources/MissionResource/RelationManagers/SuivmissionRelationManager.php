@@ -99,7 +99,7 @@ class SuivmissionRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->recordTitleAttribute('mission_id')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('ع/ر'),

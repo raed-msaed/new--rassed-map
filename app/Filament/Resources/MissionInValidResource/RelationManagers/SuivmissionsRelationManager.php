@@ -1,37 +1,31 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\MissionInValidResource\RelationManagers;
 
-use App\Filament\Resources\SuivmissionResource\Pages;
-use App\Filament\Resources\SuivmissionResource\RelationManagers;
-use App\Models\Mission;
 use App\Models\Point;
-use App\Models\Suivmission;
-use Filament\Forms\Set;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Forms\Set;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 
-class SuivmissionResource extends Resource
+class SuivmissionsRelationManager extends RelationManager
 {
-    protected static ?string $model = Suivmission::class;
+    protected static string $relationship = 'suivmission';
 
-    protected static ?string $navigationIcon = 'fas-plane-circle-check';
+    protected static ?string $title = 'المهمات المنفذة';
 
-    protected static ?string $navigationLabel = 'متابعة برنامج المهام المنفذة';
+    protected static ?string $navigationLabel = 'متابعة برنامج المهام';
 
     protected static ?string $modelLabel = 'تنفيذ مهمة';
 
     protected static ?string $pluralModelLabel = 'المهمات المنفذة';
 
-    protected static ?int $navigationSort = 3;
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -102,15 +96,17 @@ class SuivmissionResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('mission_id')
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ع/ر'),
                 Tables\Columns\TextColumn::make('mission.refmission')
                     ->label('رمز المهمة')
                     ->numeric()
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('datedebut')
                     ->label('تاريخ بداية التنفيذ')
                     ->dateTime()
@@ -120,18 +116,21 @@ class SuivmissionResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('moyenne')
-                    ->label('الوسيلة'),
+                    ->label('الوسيلة')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('point.title')
                     ->label('النقطة الدالة')
                     ->numeric()
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('descriptionpoint')
                     ->label('وصف النقطة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('reconnaissance')
                     ->label('الإستطلاع')
                     ->searchable(),
+                /*   Tables\Columns\TextColumn::make('descriptionphoto')
+                    ->label('وصف الصورة')
+                    ->searchable(),*/
                 Tables\Columns\ImageColumn::make('photoaerienne')
                     ->label('الصورة الجوية'),
                 Tables\Columns\ImageColumn::make('photogeoaerienne')
@@ -154,31 +153,17 @@ class SuivmissionResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListSuivmissions::route('/'),
-            'create' => Pages\CreateSuivmission::route('/create'),
-            'view' => Pages\ViewSuivmission::route('/{record}'),
-            'edit' => Pages\EditSuivmission::route('/{record}/edit'),
-        ];
     }
 }

@@ -2,36 +2,39 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MissionResource\Pages;
-use App\Filament\Resources\MissionResource\RelationManagers;
-use App\Filament\Resources\MissionResource\RelationManagers\PointsRelationManager;
-use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionRelationManager;
-use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionsRelationManager;
-use App\Filament\Resources\MissionResource\Widgets\MissionStats;
+use App\Filament\Resources\MissionValidResource\RelationManagers\SuivmissionsRelationManager;
+use App\Filament\Resources\MissionValidResource\Pages;
+use App\Filament\Resources\MissionValidResource\RelationManagers;
+use App\Filament\Resources\MissionValidResource\RelationManagers\PointsRelationManager;
 use App\Models\Mission;
+use App\Models\MissionValid;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Radio;
 
-class MissionResource extends Resource
+class MissionValidResource extends Resource
 {
     protected static ?string $model = Mission::class;
 
-    protected static ?string $navigationIcon = 'fas-list-check';
-    //protected static ?string $navigationIcon = 'fas-plane-departure';
+    protected static ?string $navigationIcon = 'fas-plane-circle-check';
 
-    protected static ?string $navigationLabel = 'جميع المهمات';
+    protected static ?string $navigationLabel = 'المهمات المعتمدة';
 
     protected static ?string $modelLabel = 'مهمة';
 
     protected static ?string $pluralModelLabel = 'المهمات';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('statusaccord', 'نعم');
+    }
 
     public static function form(Form $form): Form
     {
@@ -138,21 +141,21 @@ class MissionResource extends Resource
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('timemission')
-                    ->label('التوقيت'),
+                    ->label('التوقيت')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('type_mission')
                     ->label('صنف المهمة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('objectif_mission')
-                    ->label('الهدف من المهمة'),
+                    ->label('الهدف من المهمة')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('zone')
                     ->label('المنطقة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('besoinrenseignement')
-                    ->label('حاجيات الإستعلام')
-                    ->searchable(),
+                    ->label('حاجيات الإستعلام'),
                 Tables\Columns\TextColumn::make('accordgrci')
-                    ->label('مصادقة مركز الإستطلاع')
-                    ->searchable(),
+                    ->label('مصادقة مركز الإستطلاع'),
                 Tables\Columns\TextColumn::make('organisationaccord.name')
                     ->label('الجهة المصادقة')
                     ->sortable(),
@@ -180,7 +183,6 @@ class MissionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -194,17 +196,16 @@ class MissionResource extends Resource
     {
         return [
             PointsRelationManager::class,
-            SuivmissionRelationManager::class
+            SuivmissionsRelationManager::class
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMissions::route('/'),
-            'create' => Pages\CreateMission::route('/create'),
-            'view' => Pages\ViewMission::route('/{record}'),
-            'edit' => Pages\EditMission::route('/{record}/edit'),
+            'index' => Pages\ListMissionValids::route('/'),
+            //   'create' => Pages\CreateMissionValid::route('/create'),
+            'edit' => Pages\EditMissionValid::route('/{record}/edit'),
         ];
     }
 }

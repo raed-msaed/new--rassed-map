@@ -17,12 +17,13 @@
       /* Aligns text to the left */
     }
   </style>
-  <div id="map" style="width: 80%; height: 90vh;position: fixed;bottom:5px">
+  <div id="map" style="width: 100%; height: 88vh;position: relative;bottom:5px">
+    <div id="coordinates"
+      style="position: absolute;top: 10px;left: 100px;background: rgba(71, 63, 63, 0.7);padding: 5px;border-radius: 5px;font-size: 14px;z-index: 1000;">
+      <strong>Coordinates:</strong> <span id="lat"></span>, <span id="lng"></span>
+    </div>
   </div>
-  <div id="coordinates"
-    style="position: fixed; bottom: 10px; left: 10px; background: rgba(255, 255, 255, 0.8); padding: 5px; border-radius: 5px;">
-    <strong>Coordinates:</strong> <span id="lat"></span>, <span id="lng"></span>
-  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize your Leaflet map here
