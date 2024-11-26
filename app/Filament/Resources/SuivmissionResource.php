@@ -29,8 +29,17 @@ class SuivmissionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'المهمات المنفذة';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 1;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'متابعة تنفيذ المهمات'; // Group name
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'متابعة برنامج المهام المنفذة';
+    }
     public static function form(Form $form): Form
     {
         return $form

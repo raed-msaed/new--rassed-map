@@ -4,6 +4,7 @@ namespace App\Filament\Resources\MissionResource\RelationManagers;
 
 use App\Models\Point;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -29,18 +30,30 @@ class SuivmissionRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('mission_id')
-                    ->relationship('mission', 'refmission')
-                    ->label('رمز المهمة')
-                    ->default(null)
-                    ->searchable() // Makes the field searchable
-                    ->preload()
+                Select::make('point_id')
+                    ->label('النقطة الدالة')
                     ->required()
-                    ->reactive() // Makes the field reactive
-                    ->afterStateUpdated(function (Set $set, $state) { // Type-hint `$set` as `Set`
-                        // Reset the point_id when mission_id changes
-                        $set('point_id', null);
-                    }),
+                    ->options(function (callable $get) {
+                        // Ensure mission_id is available
+                        $missionId = $get('mission_id');
+
+                        if (!$missionId) {
+                            return [];
+                        }
+
+                        // Fetch points related to the mission
+                        return \App\Models\Point::where('mission_id', $missionId)
+                            ->pluck('title', 'id')
+                            ->toArray();
+                    })
+                    ->reactive() // Ensures updates when mission_id changes
+                    ->searchable(),
+                // Ensure mission_id is pre-set when adding new records
+                Select::make('mission_id')
+                    ->label('Mission')
+                    ->relationship('mission', 'refmission')
+                    ->default(fn (RelationManager $livewire) => $livewire->ownerRecord->id)
+                    ->hidden(), // Automatically set without user interaction
                 Forms\Components\DateTimePicker::make('datedebut')
                     ->label('تاريخ بداية التنفيذ')
                     ->extraInputAttributes(['style' => 'text-align:right'])
@@ -55,32 +68,21 @@ class SuivmissionRelationManager extends RelationManager
                     ->label('الوسيلة')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\Select::make('point_id')
-                    ->label('النقطة الدالة')
-                    ->options(function ($get) {
-                        $missionId = $get('mission_id'); // Get the selected mission ID
-                        if ($missionId) {
-                            // Fetch points related to the selected mission
-                            return Point::where('mission_id', $missionId)->pluck('title', 'id');
-                        }
-                        return []; // Return empty options if no mission is selected
-                    })
-                    ->searchable()
-                    ->preload()
-                    ->required()
-                    ->disabled(fn ($get) => !$get('mission_id')), // Disable if no mission is selected
                 Forms\Components\TextInput::make('descriptionpoint')
                     ->label('وصف النقطة')
                     ->maxLength(255)
-                    ->default(null),
+                    ->default(null)
+                    ->columnSpan(2),
                 Forms\Components\TextInput::make('reconnaissance')
                     ->label('الإستطلاع')
                     ->maxLength(255)
-                    ->default(null),
+                    ->default(null)
+                    ->columnSpan(2),
                 Forms\Components\TextInput::make('descriptionphoto')
                     ->label('وصف الصورة')
                     ->maxLength(255)
-                    ->default(null),
+                    ->default(null)
+                    ->columnSpan(2),
                 Forms\Components\FileUpload::make('photoaerienne')
                     ->label('الصورة الجوية')
                     ->directory('attachment')
@@ -99,14 +101,8 @@ class SuivmissionRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('mission_id')
+            ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ع/ر'),
-                Tables\Columns\TextColumn::make('mission.refmission')
-                    ->label('رمز المهمة')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('datedebut')
                     ->label('تاريخ بداية التنفيذ')
                     ->dateTime()
@@ -120,7 +116,6 @@ class SuivmissionRelationManager extends RelationManager
                     ->searchable(),
                 Tables\Columns\TextColumn::make('point.title')
                     ->label('النقطة الدالة')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('descriptionpoint')
                     ->label('وصف النقطة')
@@ -128,9 +123,7 @@ class SuivmissionRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('reconnaissance')
                     ->label('الإستطلاع')
                     ->searchable(),
-                /*   Tables\Columns\TextColumn::make('descriptionphoto')
-                    ->label('وصف الصورة')
-                    ->searchable(),*/
+
                 Tables\Columns\ImageColumn::make('photoaerienne')
                     ->label('الصورة الجوية'),
                 Tables\Columns\ImageColumn::make('photogeoaerienne')

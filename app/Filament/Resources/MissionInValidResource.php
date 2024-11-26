@@ -31,6 +31,20 @@ class MissionInValidResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    /* protected static ?string $navigationParentItem = 'Notifications';
+
+    protected static ?string $navigationGroup = 'Settings';*/
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'إدارة المهمات'; // Group name
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return ' المهمات المصادقة م إ م ج';
+    }
+
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
         return parent::getEloquentQuery()->where('accordgrci', 'نعم');
@@ -112,7 +126,7 @@ class MissionInValidResource extends Resource
                     ->label('الملاحظات')
                     ->maxLength(255)
                     ->default(null),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table

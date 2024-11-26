@@ -8,6 +8,7 @@ use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
@@ -53,7 +54,8 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Orange,
             ])
             ->navigationGroups([
-                'متابعة المهمات',
+                'إدارة المهمات',
+                'متابعة تنفيذ المهمات',
                 'الإعدادات',
                 'تسيير',
             ])

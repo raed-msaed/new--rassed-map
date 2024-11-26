@@ -33,6 +33,15 @@ class MissionResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'إدارة المهمات'; // Group name
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'جميع المهمات';
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -109,7 +118,7 @@ class MissionResource extends Resource
                     ->label('الملاحظات')
                     ->maxLength(255)
                     ->default(null),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table

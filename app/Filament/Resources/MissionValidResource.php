@@ -31,6 +31,15 @@ class MissionValidResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'إدارة المهمات'; // Group name
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'المهمات المعتمدة';
+    }
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('statusaccord', 'نعم');
@@ -112,7 +121,7 @@ class MissionValidResource extends Resource
                     ->label('الملاحظات')
                     ->maxLength(255)
                     ->default(null),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table

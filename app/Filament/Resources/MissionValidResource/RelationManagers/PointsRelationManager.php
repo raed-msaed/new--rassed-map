@@ -26,12 +26,6 @@ class PointsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('mission_id')
-                    ->label('المهمة')
-                    ->relationship('mission', 'refmission')
-                    ->searchable() // Makes the field searchable
-                    ->preload()
-                    ->required(),
                 Forms\Components\TextInput::make('title')
                     ->label('إسم النقطة')
                     ->required()
@@ -58,12 +52,8 @@ class PointsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('mission_id')
+            ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('mission.refmission')
-                    ->label('المهمة')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('إسم النقطة')
                     ->searchable(),

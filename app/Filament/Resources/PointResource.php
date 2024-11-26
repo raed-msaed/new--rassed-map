@@ -26,7 +26,15 @@ class PointResource extends Resource
     protected static ?string $pluralModelLabel = 'قائمة النقاط الدالة';
 
     protected static ?int $navigationSort = 2;
+    public static function getNavigationGroup(): ?string
+    {
+        return 'متابعة تنفيذ المهمات'; // Group name
+    }
 
+    public static function getNavigationLabel(): string
+    {
+        return 'متابعة النقاط الدالة';
+    }
     public static function form(Form $form): Form
     {
         return $form
