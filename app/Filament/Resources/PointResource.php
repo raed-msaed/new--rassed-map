@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionRelationManager;
 use App\Filament\Resources\PointResource\Pages;
 use App\Filament\Resources\PointResource\RelationManagers;
 use App\Models\Point;
@@ -78,7 +79,8 @@ class PointResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('إسم النقطة')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('latitude')
                     ->label('خط الطول')
                     ->numeric()
@@ -118,7 +120,7 @@ class PointResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SuivmissionRelationManager::class,
         ];
     }
 

@@ -93,15 +93,16 @@
             }).addTo(map);
 
             // Optional: Add a popup with point details
-            marker.bindPopup(`
-              <strong>Title:</strong> ${point.title}<br>
-               <strong>Latitude:</strong> ${latDMS}<br>
-              <strong>Longitude:</strong> ${lngDMS}<br>
-              <a href="/admin/points/${point.id}/edit">تحيين النقطة الدالة</a>
+            marker.bindPopup(`<br>
+             <strong> الإسم: </strong>  ${point.title} <br>
+             ${point.latitude} <strong> :خط العرض </strong> <br>
+             ${point.longitude} <strong> :خط الطول </strong> <br>
+              <a href="/admin/points/${point.id}">عرض جميع المهمات المنفذة</a>
+           
             `);
           });
         })
-        .catch(error => console.error('Error fetching points:', error));
+        .catch(error => console.error('لا يمكن تحديد النقطة الدالة:', error));
 
       // Event listener for mouse movement on the map
       map.on('mousemove', function(e) {
@@ -130,8 +131,10 @@
 
         // Create popup content with a link to the Filament resource
         var popupContent = `
-                    <strong>coordinates:</strong><br>${latDD},${lngDD}<br>
-                    <a href="${createUrl}">Add Cordinates</a>
+              <strong> :الإحداثيات</strong><br>
+              ${latDD} <strong> :خط العرض </strong> <br>
+              ${lngDD} <strong> :خط الطول </strong> <br>
+              <a href="${createUrl}">إضافة نقطة دالة</a>
                 `;
         // Display the coordinates in a popup
         // var popupContent = `
