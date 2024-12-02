@@ -3,6 +3,11 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Resources\MissionValidResource;
+use App\Models\Icon;
+use App\Models\Mission;
+use App\Models\Point;
+use App\Models\Suivmission;
+use App\Observers\HistoryObserver;
 use Filament\Facades\Filament;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
@@ -97,4 +102,9 @@ class AdminPanelProvider extends PanelProvider
             MissionValidResource::class,
         ]);
     }
+    protected $listen = [
+        \App\Events\ModelChanged::class => [
+            \App\Listeners\LogModelChanges::class,
+        ],
+    ];
 }

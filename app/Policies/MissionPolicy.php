@@ -15,7 +15,7 @@ class MissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_mission');
+        return $user->can('view_any_mission::valid');
     }
 
     /**
@@ -23,7 +23,7 @@ class MissionPolicy
      */
     public function view(User $user, Mission $mission): bool
     {
-        return $user->can('view_mission');
+        return $user->can('view_mission::valid');
     }
 
     /**
@@ -31,7 +31,7 @@ class MissionPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_mission');
+        return $user->can('create_mission::valid');
     }
 
     /**
@@ -39,7 +39,7 @@ class MissionPolicy
      */
     public function update(User $user, Mission $mission): bool
     {
-        return $user->can('update_mission');
+        return $user->can('update_mission::valid');
     }
 
     /**
@@ -47,7 +47,7 @@ class MissionPolicy
      */
     public function delete(User $user, Mission $mission): bool
     {
-        return $user->can('delete_mission');
+        return $user->can('delete_mission::valid');
     }
 
     /**
@@ -55,7 +55,7 @@ class MissionPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_mission');
+        return $user->can('delete_any_mission::valid');
     }
 
     /**
@@ -63,7 +63,7 @@ class MissionPolicy
      */
     public function forceDelete(User $user, Mission $mission): bool
     {
-        return $user->can('force_delete_mission');
+        return $user->can('force_delete_mission::valid');
     }
 
     /**
@@ -71,7 +71,7 @@ class MissionPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_mission');
+        return $user->can('force_delete_any_mission::valid');
     }
 
     /**
@@ -79,7 +79,7 @@ class MissionPolicy
      */
     public function restore(User $user, Mission $mission): bool
     {
-        return $user->can('restore_mission');
+        return $user->can('restore_mission::valid');
     }
 
     /**
@@ -87,7 +87,7 @@ class MissionPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_mission');
+        return $user->can('restore_any_mission::valid');
     }
 
     /**
@@ -95,7 +95,7 @@ class MissionPolicy
      */
     public function replicate(User $user, Mission $mission): bool
     {
-        return $user->can('replicate_mission');
+        return $user->can('replicate_mission::valid');
     }
 
     /**
@@ -103,6 +103,6 @@ class MissionPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_mission');
+        return $user->can('reorder_mission::valid');
     }
 }
