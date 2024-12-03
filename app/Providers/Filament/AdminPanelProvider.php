@@ -2,12 +2,16 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\HistoryLogResource;
 use App\Filament\Resources\MissionValidResource;
 use App\Models\Icon;
 use App\Models\Mission;
 use App\Models\Point;
 use App\Models\Suivmission;
 use App\Observers\HistoryObserver;
+use App\Observers\MissionObserver;
+use App\Observers\PointObserver;
+use App\Observers\SuivmissionObserver;
 use Filament\Facades\Filament;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
@@ -101,6 +105,9 @@ class AdminPanelProvider extends PanelProvider
         Filament::registerResources([
             MissionValidResource::class,
         ]);
+        Mission::observe(MissionObserver::class);
+        Suivmission::observe(SuivmissionObserver::class);
+        Point::observe(PointObserver::class);
     }
     protected $listen = [
         \App\Events\ModelChanged::class => [
