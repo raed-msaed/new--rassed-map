@@ -9,6 +9,7 @@ use App\Models\Point;
 use App\Models\Suivmission;
 use Filament\Forms\Set;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -66,6 +67,12 @@ class SuivmissionResource extends Resource
                     ->extraInputAttributes(['style' => 'text-align:right'])
                     ->native(false)
                     ->displayFormat('Y-m-d H:i:s'),
+                Radio::make('validate')
+                    ->label('تنفيذ')
+                    ->options([
+                        'نعم' => 'نعم',
+                        'لا' => 'لا',
+                    ]),
                 Forms\Components\TextInput::make('moyenne')
                     ->label('الوسيلة')
                     ->maxLength(255)
@@ -82,7 +89,6 @@ class SuivmissionResource extends Resource
                     })
                     ->searchable()
                     ->preload()
-                    ->required()
                     ->disabled(fn ($get) => !$get('mission_id')), // Disable if no mission is selected
                 Forms\Components\TextInput::make('descriptionpoint')
                     ->label('وصف النقطة')
@@ -128,6 +134,9 @@ class SuivmissionResource extends Resource
                     ->label('تاريخ نهاية التنفيذ')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('validate')
+                    ->label('تنفيذ')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('moyenne')
                     ->label('الوسيلة'),
                 Tables\Columns\TextColumn::make('point.title')

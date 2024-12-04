@@ -2,6 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\DailyMissionsChartWidget;
+use App\Filament\Widgets\MissionsChartWidget;
+use App\Filament\Widgets\MissionsExecutedWidget;
 use Filament\Pages\Page;
 
 class MapPage extends Page
