@@ -17,6 +17,7 @@ return new class extends Migration
             $table->dateTime('datedebut')->nullable();
             $table->dateTime('datefin')->nullable();
             $table->string('validate')->nullable();
+            $table->string('descriptionvalidate')->nullable();
             $table->string('moyenne')->nullable();
             $table->foreignId('point_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('descriptionpoint')->nullable();

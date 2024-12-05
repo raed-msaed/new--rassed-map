@@ -73,6 +73,10 @@ class SuivmissionResource extends Resource
                         'نعم' => 'نعم',
                         'لا' => 'لا',
                     ]),
+                Forms\Components\TextInput::make('descriptionvalidate')
+                    ->label('ملاحظات')
+                    ->maxLength(255)
+                    ->default(null),
                 Forms\Components\TextInput::make('moyenne')
                     ->label('الوسيلة')
                     ->maxLength(255)

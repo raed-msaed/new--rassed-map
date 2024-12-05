@@ -4,6 +4,7 @@ namespace App\Filament\Resources\MissionInValidResource\RelationManagers;
 
 use App\Models\Point;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
@@ -64,6 +65,16 @@ class SuivmissionsRelationManager extends RelationManager
                     ->extraInputAttributes(['style' => 'text-align:right'])
                     ->native(false)
                     ->displayFormat('Y-m-d H:i:s'),
+                Radio::make('validate')
+                    ->label('تنفيذ')
+                    ->options([
+                        'نعم' => 'نعم',
+                        'لا' => 'لا',
+                    ]),
+                Forms\Components\TextInput::make('descriptionvalidate')
+                    ->label('ملاحظات')
+                    ->maxLength(255)
+                    ->default(null),
                 Forms\Components\TextInput::make('moyenne')
                     ->label('الوسيلة')
                     ->maxLength(255)
@@ -111,6 +122,9 @@ class SuivmissionsRelationManager extends RelationManager
                     ->label('تاريخ نهاية التنفيذ')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('validate')
+                    ->label('تنفيذ')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('moyenne')
                     ->label('الوسيلة')
                     ->searchable(),
