@@ -114,8 +114,7 @@ class MissionInValidResource extends Resource
                     ]),
                 Forms\Components\Select::make('organisationaccord_id')
                     ->label('الجهة المصادقة')
-                    ->relationship('organisationaccord', 'name')
-                    ->required(),
+                    ->relationship('organisationaccord', 'name'),
                 Radio::make('statusaccord')
                     ->label('مصادقة الجهة')
                     ->options([
@@ -221,7 +220,8 @@ class MissionInValidResource extends Resource
     {
         return [
             'index' => Pages\ListMissionInValids::route('/'),
-            'create' => Pages\CreateMissionInValid::route('/create'),
+            //    'create' => Pages\CreateMissionInValid::route('/create'),
+            'view' => Pages\ViewMissionInValid::route('/{record}'),
             'edit' => Pages\EditMissionInValid::route('/{record}/edit'),
         ];
     }

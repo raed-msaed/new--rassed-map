@@ -10,20 +10,51 @@
       display: none;
     }
 
+
     .leaflet-popup-content {
       direction: ltr;
       /* Ensures content is left-to-right */
       text-align: left;
       /* Aligns text to the left */
     }
+
+    .responsive-div {
+      /*position: fixed;*/
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 5px;
+      background-color: lightgray;
+      /*  width: 100%;
+      height: 100%;*/
+      padding-left: 5px;
+      height: 800px;
+      /* Takes up full available width */
+      max-width: 100%;
+      max-height: 100%;
+
+
+      /* Ensures it does not stretch beyond 100% of its container */
+      box-sizing: border-box;
+      /* Prevents padding from affecting width */
+      z-index: 1;
+      /* Ensure it's behind the content */
+    }
   </style>
-  <div id="map" style="width: 100%; height: 88vh;position: relative;bottom:5px">
+  <!--style="width: 80%;
+    height: 88vh;
+    position: fixed;
+    bottom:5px"-->
+  <div id="map" class="responsive-div">
+
+
     <div id="coordinates"
       style="position: absolute;top: 10px;left: 100px;background: rgba(71, 63, 63, 0.7);padding: 5px;border-radius: 5px;font-size: 14px;z-index: 1000;">
-      <strong>Coordinates:</strong> <span id="lat"></span>, <span id="lng"></span>
+      <strong>Coordinates:</strong><span id="lat"></span>,
+      <span id="lng"></span>
     </div>
   </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize your Leaflet map here

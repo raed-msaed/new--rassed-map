@@ -20,7 +20,9 @@ class MissionsChartWidget extends ChartWidget
         $missions = DB::table('missions')
             ->where(function ($query) use ($today, $nextDay) {
                 $query->whereDate('datedebutmission', '<=', $nextDay)
-                    ->whereDate('datefinmission', '>=', $today);
+                    ->whereDate('datefinmission', '>=', $today)
+                    ->where('accordgrci', '=', 'نعم')
+                    ->where('statusaccord', '=', 'نعم');
             })
             ->select(DB::raw('DATE(datedebutmission) as date'), DB::raw('count(*) as count'))
             ->groupBy('date')

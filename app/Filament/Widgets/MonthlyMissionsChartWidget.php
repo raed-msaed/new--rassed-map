@@ -20,6 +20,8 @@ class MonthlyMissionsChartWidget extends ChartWidget
         // Fetch missions grouped by year and month from the start of the year
         $missions = DB::table('missions')
             ->whereDate('datefinmission', '>=', $startOfYear) // Only missions from this year onward
+            ->where('accordgrci', '=', 'نعم')
+            ->where('statusaccord', '=', 'نعم')
             ->select(
                 DB::raw('YEAR(datedebutmission) as year'),
                 DB::raw('MONTH(datedebutmission) as month'),

@@ -106,8 +106,7 @@ class MissionResource extends Resource
                     ]),
                 Forms\Components\Select::make('organisationaccord_id')
                     ->label('الجهة المصادقة')
-                    ->relationship('organisationaccord', 'name')
-                    ->required(),
+                    ->relationship('organisationaccord', 'name'),
                 Radio::make('statusaccord')
                     ->label('مصادقة الجهة')
                     ->options([

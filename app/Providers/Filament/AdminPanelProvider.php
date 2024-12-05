@@ -35,6 +35,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
+
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -67,10 +68,11 @@ class AdminPanelProvider extends PanelProvider
                 'متابعة تنفيذ المهمات',
                 'الإعدادات',
                 'تسيير',
+                'تعريف المنظومة'
             ])
-            ->brandName('منظومة رصد')
+            ->brandName('رصد جيوفضائية')
             ->brandLogo(asset('images/logo.png'))
-            ->brandLogoHeight('4rem')
+            ->brandLogoHeight('3.5rem')
             ->favicon(asset('images/logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

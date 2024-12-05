@@ -20,6 +20,8 @@ class AnnualMissionsChartWidget extends ChartWidget
         // Fetch missions grouped by year from the start of the years when missions are registered
         $missions = DB::table('missions')
             ->whereDate('datefinmission', '>=', $startOfYear) // Only include missions starting from the beginning of the current year
+            ->where('accordgrci', '=', 'نعم')
+            ->where('statusaccord', '=', 'نعم')
             ->select(
                 DB::raw('YEAR(datedebutmission) as year'),
                 DB::raw('count(*) as count')

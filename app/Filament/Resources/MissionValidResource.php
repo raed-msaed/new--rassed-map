@@ -109,8 +109,7 @@ class MissionValidResource extends Resource
                     ]),
                 Forms\Components\Select::make('organisationaccord_id')
                     ->label('الجهة المصادقة')
-                    ->relationship('organisationaccord', 'name')
-                    ->required(),
+                    ->relationship('organisationaccord', 'name'),
                 Radio::make('statusaccord')
                     ->label('مصادقة الجهة')
                     ->options([
@@ -215,6 +214,7 @@ class MissionValidResource extends Resource
         return [
             'index' => Pages\ListMissionValids::route('/'),
             //   'create' => Pages\CreateMissionValid::route('/create'),
+            'view' => Pages\ViewMissionValid::route('/{record}'),
             'edit' => Pages\EditMissionValid::route('/{record}/edit'),
         ];
     }
