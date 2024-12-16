@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class DailyMissionsChartWidget extends ChartWidget
 {
-    protected static ?string $heading = 'عدد المهمات حسب اليوم';
+    protected static ?string $heading = 'عدد المهمات المعتمدة حسب اليوم';
 
     protected static ?int $sort = 2;
 
@@ -37,7 +37,7 @@ class DailyMissionsChartWidget extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'عدد المهمات',
+                    'label' => 'المهمات',
                     'data' => $counts,
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',

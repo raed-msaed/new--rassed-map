@@ -3,12 +3,13 @@
 namespace App\Filament\Widgets;
 
 use Carbon\Carbon;
+use Filament\Support\RawJs;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
 
 class MissionsChartWidget extends ChartWidget
 {
-    protected static ?string $heading = 'عدد المهمات اليومية';
+    protected static ?string $heading = 'عدد المهمات المعتمدة لهذا اليوم';
 
     protected static ?int $sort = 1;
     protected function getData(): array
@@ -35,7 +36,7 @@ class MissionsChartWidget extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'عدد المهمات',
+                    'label' => 'المهمات',
                     'data' => $counts,
                 ],
             ],
@@ -46,5 +47,22 @@ class MissionsChartWidget extends ChartWidget
     protected function getType(): string
     {
         return 'bar';
+    }
+
+    protected function getOptions(): RawJs
+    {
+        return RawJs::make(<<<JS
+        {
+            scales: {
+                y: {
+                    ticks: {
+                        stepSize: 1, // Force ticks to increment by 1
+                        callback: (value) => Math.floor(value),
+                    },
+                    beginAtZero: true // Ensures the scale starts at 0
+                },
+            },
+        }
+    JS);
     }
 }

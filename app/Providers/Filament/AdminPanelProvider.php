@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Resources\HistoryLogResource;
 use App\Filament\Resources\MissionValidResource;
+use App\Filament\Widgets\SuivMissionWidget;
 use App\Models\Icon;
 use App\Models\Mission;
 use App\Models\Point;
@@ -20,6 +21,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Pages;
+use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;

@@ -3,13 +3,12 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Mission;
-use App\Models\User;
 use Carbon\Carbon;
 use Filament\Support\Enums\IconPosition;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class TestWidget extends BaseWidget
+class MissioncountWidget extends BaseWidget
 {
     protected function getStats(): array
     {
@@ -25,11 +24,10 @@ class TestWidget extends BaseWidget
             ->where('statusaccord', '=', 'نعم')->count();
 
         return [
-            Stat::make('العدد', $completedMissions)
-                ->description('عدد الجملي للمهمات المعتمدة لسنة الحالية')
-                ->descriptionIcon('fas-plane-departure', IconPosition::Before)
-                ->chart([$totalMissions, $completedMissions, 10, 15, 7]) // Example chart data
-                ->color('success'),
+            Stat::make('العدد', $totalMissions)
+                ->description('عدد الجملي للمهمات لسنة الحالية')
+                ->descriptionIcon('fas-plane', IconPosition::Before)
+                ->chart([$totalMissions, $completedMissions, 30, 15, 20]), // Example chart data
         ];
     }
 }
