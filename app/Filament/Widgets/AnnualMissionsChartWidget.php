@@ -11,7 +11,7 @@ class AnnualMissionsChartWidget extends ChartWidget
 {
     protected static ?string $heading = 'عدد المهمات المعتمدة حسب السنة';
 
-    protected static ?int $sort = 4;
+    protected static ?int $sort = 6;
 
     protected function getData(): array
     {

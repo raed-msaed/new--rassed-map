@@ -11,7 +11,7 @@ class MonthlyMissionsChartWidget extends ChartWidget
 {
     protected static ?string $heading = 'عدد المهمات المعتمدة حسب الشهر';
 
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 5;
 
     protected function getData(): array
     {

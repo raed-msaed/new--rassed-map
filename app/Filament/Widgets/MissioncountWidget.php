@@ -10,8 +10,13 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class MissioncountWidget extends BaseWidget
 {
+    //protected int | string | array $columnSpan = 3;
+    protected static ?int $sort = 1;
+    protected int | string | array $columns = 5;
+    protected int | string | array $columnSpan = 'xl';
     protected function getStats(): array
     {
+
         $today = Carbon::today();
         $startOfYear = $today->copy()->startOfYear(); // Start of the current year
 
@@ -27,7 +32,7 @@ class MissioncountWidget extends BaseWidget
             Stat::make('العدد', $totalMissions)
                 ->description('عدد الجملي للمهمات لسنة الحالية')
                 ->descriptionIcon('fas-plane', IconPosition::Before)
-                ->chart([$totalMissions, $completedMissions, 30, 15, 20]), // Example chart data
+                ->chart([$totalMissions, $completedMissions, 30, 15, 20]),
         ];
     }
 }

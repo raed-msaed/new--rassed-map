@@ -11,6 +11,11 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class TestWidget extends BaseWidget
 {
+    protected static ?int $sort = 2;
+    protected int | string | array $columns = 5;
+
+    protected int | string | array $columnSpan = 'xl';
+
     protected function getStats(): array
     {
         $today = Carbon::today();

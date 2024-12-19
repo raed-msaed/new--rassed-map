@@ -11,7 +11,7 @@ class DailyMissionsChartWidget extends ChartWidget
 {
     protected static ?string $heading = 'عدد المهمات المعتمدة حسب اليوم';
 
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 4;
 
     protected function getData(): array
     {

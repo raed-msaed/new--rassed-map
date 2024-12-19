@@ -11,7 +11,7 @@ class MissionsChartWidget extends ChartWidget
 {
     protected static ?string $heading = 'عدد المهمات المعتمدة لهذا اليوم';
 
-    protected static ?int $sort = 1;
+    protected static ?int $sort = 3;
     protected function getData(): array
     {
         $today = Carbon::today();
