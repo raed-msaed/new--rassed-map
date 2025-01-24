@@ -140,6 +140,7 @@ class MissionResource extends Resource
                 Tables\Columns\TextColumn::make('datedebutmission')
                     ->label('تاريخ بداية المهمة')
                     ->date()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datefinmission')
                     ->label('تاريخ نهاية المهمة')

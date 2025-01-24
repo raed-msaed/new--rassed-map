@@ -41,6 +41,18 @@
       z-index: 1;
       /* Ensure it's behind the content */
     }
+
+    #searchContainer {
+      margin: 3px;
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: rgba(71, 63, 63, 0.7);
+      padding: 3px;
+      border-radius: 5px;
+      font-size: 14px;
+      z-index: 1000;
+    }
   </style>
   <!--style="width: 80%;
     height: 88vh;
@@ -48,6 +60,10 @@
     bottom:5px"-->
   <div id="map" class="responsive-div">
 
+    <div id="searchContainer">
+      <button onclick="searchCoordinates()">بحث</button>
+      <input type="text" id="coordInput" placeholder="أدخل الإحدثيات (lat,lng)">
+    </div>
 
     <div id="coordinates"
       style="position: absolute;top: 10px;left: 100px;background: rgba(71, 63, 63, 0.7);padding: 5px;border-radius: 5px;font-size: 14px;z-index: 1000;">
@@ -60,9 +76,9 @@
       // Initialize your Leaflet map here
       var map = L.map('map').setView([36.8065, 10.1815], 13); // Coordonnées de Tunis
       // Add your tile layer
-      L.tileLayer('http://localhost:8080/styles/klokantech-basic/{z}/{x}/{y}.png', {
+      L.tileLayer('http://localhost:8080/styles/test-style/{z}/{x}/{y}.png', {
         maxZoom: 20,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '© OpenStreetMap contributors'
       }).addTo(map);
 
       // Convert decimal degrees to DMS format
@@ -116,7 +132,36 @@
               iconSize: [32, 32],
               iconAnchor: [16, 32],
               popupAnchor: [0, -32]
-            });
+            });      // Function to search for coordinates
+      function searchCoordinates() {
+        const input = document.getElementById('coordInput').value.trim();
+        const [lat, lng] = input.split(',').map(coord => parseFloat(coord));
+
+        if (isNaN(lat) || isNaN(lng)) {
+          alert("Please enter valid coordinates in the format 'lat,lng'.");
+          return;
+        }
+
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+          alert(
+            "Coordinates out of bounds. Latitude must be between -90 and 90, and longitude between -180 and 180.");
+          return;
+        }
+
+        // Set map view to the entered coordinates
+        map.setView([lat, lng], 13);
+
+        // Add or update marker
+        if (marker) {
+          marker.setLatLng([lat, lng]);
+        } else {
+          marker = L.marker([lat, lng]).addTo(map);
+        }
+      }
+
+      document.getElementById('coordInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') searchCoordinates();
+      });
 
             // Create a marker for each point
             var marker = L.marker([point.latitude, point.longitude], {
@@ -182,6 +227,38 @@
           .openOn(map);
       });
 
+      let marker;
+
+      // Function to search for coordinates
+      function searchCoordinates() {
+        const input = document.getElementById('coordInput').value.trim();
+        const [lat, lng] = input.split(',').map(coord => parseFloat(coord));
+
+        if (isNaN(lat) || isNaN(lng)) {
+          alert("Please enter valid coordinates in the format 'lat,lng'.");
+          return;
+        }
+
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+          alert(
+            "Coordinates out of bounds. Latitude must be between -90 and 90, and longitude between -180 and 180.");
+          return;
+        }
+
+        // Set map view to the entered coordinates
+        map.setView([lat, lng], 13);
+
+        // Add or update marker
+        if (marker) {
+          marker.setLatLng([lat, lng]);
+        } else {
+          marker = L.marker([lat, lng]).addTo(map);
+        }
+      }
+
+      document.getElementById('coordInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') searchCoordinates();
+      });
     });
   </script>
 </x-filament::page>

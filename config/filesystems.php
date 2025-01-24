@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('FILESYSTEM_DISK', 'local'),
+    # 'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,6 +45,14 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        // 'public' => [
+        //     'driver' => 'local',
+        //     'root' => '/mnt/nas/storage/attachment',
+        //     'url' => env('APP_URL').'/storage',
+        //     'visibility' => 'public',
+        // ],
+
+
 
         'icons' => [
             'driver' => 'local',
@@ -53,13 +62,46 @@ return [
             'throw' => false,
         ],
 
-        'attachment' => [
+        // 'attachment' => [
+        //     'driver' => 'local',
+        //     'root' => storage_path('app/public/attachment'),
+        //     'url' => env('APP_URL') . '/storage/attachment',
+        //     'visibility' => 'public',
+        //     'throw' => false,
+        // ],
+        // 'attachment' => [
+        //             'driver' => 'ftp',  // Use 'ftp' or 's3' depending on your NAS protocol
+        //             'host' => '192.168.100.176',
+        //             'username' => 'userjrc',
+        //             'password' => 'Jrc@2025',
+        //             'root' => '/storage/attachement',
+        //             'port' => 21,  // Optional: Default is 22 for SSH/SFTP
+        //             'visibility' => 'public',  // 'private' or 'public'
+        //             'timeout' => 30,  // Optional: Timeout in seconds
+        // ],
+        // 'nas' => [
+        //     'driver' => 'local',
+        //     'root' => '/mnt/nas', // Point to the NAS mount directory
+        //     'url' => env('APP_URL') . '/storage/nas', // Optional: Customize URL if needed
+        //     'visibility' => 'public',
+        // ],
+        
+        'nas' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/attachment'),
-            'url' => env('APP_URL') . '/storage/attachment',
-            'visibility' => 'public',
-            'throw' => false,
+            'root' => '/mnt/nas',
+            'permissions' => [
+                'file' => [
+                    'public' => 0664,
+                    'private' => 0600,
+                ],
+                'dir' => [
+                    'public' => 0775,
+                    'private' => 0700,
+                ],
+            ],
         ],
+
+
 
         's3' => [
             'driver' => 's3',
@@ -88,6 +130,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('nas') => '/mnt/nas/storage', // Add a symbolic link for NAS if required
     ],
 
 ];

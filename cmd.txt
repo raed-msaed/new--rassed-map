@@ -24,3 +24,9 @@ php artisan make:filament-resource Icon --generate --view
 
 
 php artisan migrate:rollback
+
+php artisan cache:clear
+php artisan route:clear
+php artisan config:clear
+php artisan view:clear
+

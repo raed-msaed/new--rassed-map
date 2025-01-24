@@ -6,9 +6,10 @@ use App\Models\Point;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::redirect('/', '/admin');
 
 Route::get('/admin/map', [MapController::class, 'index'])->name('admin.map');
 

@@ -108,16 +108,22 @@ class SuivmissionResource extends Resource
                     ->default(null),
                 Forms\Components\FileUpload::make('photoaerienne')
                     ->label('الصورة الجوية')
-                    ->directory('attachment')
-                    ->default(null),
+                    ->disk('nas')
+                    ->directory('attachments') // Directory inside NAS
+                    ->default(null)
+                    ->visibility('public'),
                 Forms\Components\FileUpload::make('photogeoaerienne')
                     ->label('الصورة الجيوفضائية')
-                    ->directory('attachment')
-                    ->default(null),
+                    ->disk('nas')
+                    ->directory('attachments') // Directory inside NAS
+                    ->default(null)
+                    ->visibility('public'),
                 Forms\Components\FileUpload::make('video')
                     ->label('الفيديو')
-                    ->directory('attachment')
-                    ->default(null),
+                    ->disk('nas')
+                    ->directory('attachments') // Directory inside NAS
+                    ->default(null)
+                    ->visibility('public'),
             ]);
     }
 
