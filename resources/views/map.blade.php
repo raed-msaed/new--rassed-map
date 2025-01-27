@@ -35,7 +35,7 @@
     var map = L.map('map').setView([36.8065, 10.1815], 13); // Coordonnées de Tunis
 
     // Utiliser TileServer via Docker
-    L.tileLayer('http://localhost:8080/styles/klokantech-basic/{z}/{x}/{y}.png', {
+    L.tileLayer('https://rassed-map.com/styles/klokantech-basic/{z}/{x}/{y}.png', {
       maxZoom: 18,
     }).addTo(map);
 
