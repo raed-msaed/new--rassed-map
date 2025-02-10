@@ -33,3 +33,11 @@ php artisan view:clear
 Stash or discard local changes: 
 git reset --hard HEAD
 
+$ git status
+Add any changes: If there are new changes you want to push, add them with:
+$ git add .
+Commit your changes: If you've added new changes, commit them with a message:
+$ git commit -m "Your commit message"
+Push to GitHub: Finally, push your changes to GitHub by running:
+$ git push origin main
+
