@@ -16,6 +16,8 @@ npm install leaflet
 php artisan make:controller MapController
 
 ----CMD-----
+php artisan key:generate
+php artisan storage:link  -> activated public storage
 php artisan migrate:fresh --seed
 php artisan make:filament-user
 php artisan shield:install
@@ -41,3 +43,12 @@ $ git commit -m "Your commit message"
 Push to GitHub: Finally, push your changes to GitHub by running:
 $ git push origin main
 
+docker-compose down
+docker-compose build
+docker-compose up -d
+
+
+save to github:
+$ git add .
+$ git commit -m "final save"
+$ git push -u origin main
