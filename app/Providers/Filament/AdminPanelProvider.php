@@ -66,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Orange,
             ])
             ->navigationGroups([
-                'إدارة المهمات',
+                'إدارة الطلبات',
                 'متابعة تنفيذ المهمات',
                 'الإعدادات',
                 'تسيير',

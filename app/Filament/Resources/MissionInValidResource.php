@@ -23,11 +23,11 @@ class MissionInValidResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-plane-circle-exclamation';
 
-    protected static ?string $navigationLabel = ' المهمات المصادقة م إ م ج';
+    protected static ?string $navigationLabel = 'الطلبات المصادق عليها من طرف المركز';
 
-    protected static ?string $modelLabel = 'مهمة';
+    protected static ?string $modelLabel = 'طلب';
 
-    protected static ?string $pluralModelLabel = 'المهمات';
+    protected static ?string $pluralModelLabel = 'الطلبات';
 
     protected static ?int $navigationSort = 2;
 
@@ -37,12 +37,12 @@ class MissionInValidResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'إدارة المهمات'; // Group name
+        return 'إدارة الطلبات'; // Group name
     }
 
     public static function getNavigationLabel(): string
     {
-        return ' المهمات المصادقة م إ م ج';
+        return 'الطلبات المصادق عليها من طرف المركز';
     }
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder

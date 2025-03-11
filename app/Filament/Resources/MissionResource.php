@@ -25,22 +25,22 @@ class MissionResource extends Resource
     protected static ?string $navigationIcon = 'fas-list-check';
     //protected static ?string $navigationIcon = 'fas-plane-departure';
 
-    protected static ?string $navigationLabel = 'جميع المهمات';
+    protected static ?string $navigationLabel = 'الطلبات الواردة';
 
-    protected static ?string $modelLabel = 'مهمة';
+    protected static ?string $modelLabel = 'طلب مهمة';
 
-    protected static ?string $pluralModelLabel = 'المهمات';
+    protected static ?string $pluralModelLabel = 'الطلبات';
 
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationGroup(): ?string
     {
-        return 'إدارة المهمات'; // Group name
+        return 'إدارة الطلبات'; // Group name
     }
 
     public static function getNavigationLabel(): string
     {
-        return 'جميع المهمات';
+        return 'جميع الطلبات';
     }
     public static function form(Form $form): Form
     {

@@ -23,22 +23,22 @@ class MissionValidResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-plane-circle-check';
 
-    protected static ?string $navigationLabel = 'المهمات المعتمدة';
+    protected static ?string $navigationLabel = 'الطلبات المعتمدة';
 
-    protected static ?string $modelLabel = 'مهمة';
+    protected static ?string $modelLabel = 'طلب مهمة';
 
-    protected static ?string $pluralModelLabel = 'المهمات';
+    protected static ?string $pluralModelLabel = 'الطلبات';
 
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): ?string
     {
-        return 'إدارة المهمات'; // Group name
+        return 'إدارة الطلبات'; // Group name
     }
 
     public static function getNavigationLabel(): string
     {
-        return 'المهمات المعتمدة';
+        return 'الطلبات المعتمدة';
     }
     public static function getEloquentQuery(): Builder
     {
