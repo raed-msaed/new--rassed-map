@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Points_interet extends Model
+{
+    use HasFactory;
+
+    protected $guarded = [];
+
+    public function zone(): BelongsTo
+    {
+        return $this->belongsTo(Zone::class);
+    }
+}

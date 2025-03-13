@@ -14,9 +14,14 @@ class Mission extends Model
 
     protected $guarded = [];
 
-    public function points(): HasMany
+    // public function points(): HasMany
+    // {
+    //     return $this->hasMany(Point::class);
+    // }
+
+    public function zones(): HasMany
     {
-        return $this->hasMany(Point::class);
+        return $this->hasMany(Zone::class);
     }
 
     public function suivmission(): HasMany

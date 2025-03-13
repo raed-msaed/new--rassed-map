@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('refmission')->nullable();
             $table->string('type_mission')->nullable();
             $table->string('objectif_mission')->nullable();
-            $table->string('zone')->nullable();
+           // $table->string('zone')->nullable();
             $table->string('besoinrenseignement')->nullable();
             $table->string('accordgrci')->nullable();
             $table->foreignId('organisationaccord_id')->nullable()->constrained()->cascadeOnDelete();
