@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Resources\HistoryLogResource;
 use App\Filament\Resources\MissionValidResource;
 use App\Filament\Widgets\SuivMissionWidget;
@@ -33,6 +34,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -44,7 +46,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
             ->registration()
             ->profile()
             ->font(
@@ -57,13 +59,20 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('images/logo.png'))
             ->maxContentWidth(MaxWidth::Full)
             ->sidebarFullyCollapsibleOnDesktop()
+            // ->colors([
+            //     'primary' => Color::Indigo,
+            //     'danger' => Color::Red,
+            //     'gray' => Color::Slate,
+            //     'info' => Color::Blue,
+            //     'success' => Color::Emerald,
+            //     'warning' => Color::Orange,
+            // ])
+            ->navbarBackground('bg-blue-600')
             ->colors([
-                'primary' => Color::Indigo,
-                'danger' => Color::Red,
-                'gray' => Color::Slate,
-                'info' => Color::Blue,
-                'success' => Color::Emerald,
-                'warning' => Color::Orange,
+                //'primary' => '#FF5733',
+                'primary' => Color::Teal,
+                'secondary' => '#2C3E50',
+                'danger' => '#E74C3C',
             ])
             ->navigationGroups([
                 'إدارة الطلبات',
@@ -72,9 +81,9 @@ class AdminPanelProvider extends PanelProvider
                 'تسيير',
                 'تعريف المنظومة'
             ])
-            ->brandName('رصد جيوفضائية')
+            ->brandName('رصد الفضائية')
             ->brandLogo(asset('images/logo.png'))
-            ->brandLogoHeight('3.5rem')
+            ->brandLogoHeight('4rem')
             ->favicon(asset('images/logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -106,6 +115,7 @@ class AdminPanelProvider extends PanelProvider
 
     public function boot()
     {
+        App::setLocale('ar');
         Filament::registerResources([
             MissionValidResource::class,
         ]);
