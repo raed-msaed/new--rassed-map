@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Auth\Login;
+use App\Filament\Admin\Pages\Auth\Login;
 use App\Filament\Resources\HistoryLogResource;
 use App\Filament\Resources\MissionValidResource;
 use App\Filament\Widgets\SuivMissionWidget;
@@ -14,6 +14,8 @@ use App\Observers\HistoryObserver;
 use App\Observers\MissionObserver;
 use App\Observers\PointObserver;
 use App\Observers\SuivmissionObserver;
+use App\Providers\MyImageProvider;
+use DiogoGPinto\AuthUIEnhancer\AuthUIEnhancerPlugin;
 use Filament\Facades\Filament;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
@@ -36,6 +38,8 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\App;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -54,11 +58,14 @@ class AdminPanelProvider extends PanelProvider
                 url: asset('css/filament/filament/fonts.css'),
                 provider: LocalFontProvider::class,
             )
-            ->brandLogo(asset('images/logo.png'))
-            ->brandLogoHeight('4rem')
-            ->favicon(asset('images/logo.png'))
             ->maxContentWidth(MaxWidth::Full)
             ->sidebarFullyCollapsibleOnDesktop()
+            ->plugins([
+                FilamentBackgroundsPlugin::make()
+                    ->imageProvider(MyImageProvider::make()),  // Utilisation du provider personnalisé
+            ])
+
+            ->theme(asset('css/filament/admin/theme.css'))
             // ->colors([
             //     'primary' => Color::Indigo,
             //     'danger' => Color::Red,
@@ -67,12 +74,12 @@ class AdminPanelProvider extends PanelProvider
             //     'success' => Color::Emerald,
             //     'warning' => Color::Orange,
             // ])
-            ->navbarBackground('bg-blue-600')
+            // ->navbarBackground('bg-blue-600')
             ->colors([
                 //'primary' => '#FF5733',
-                'primary' => Color::Teal,
-                'secondary' => '#2C3E50',
-                'danger' => '#E74C3C',
+                'primary' => '#25c0c0',
+                'secondary' => Color::Blue,
+                'danger' => Color::Rose,
             ])
             ->navigationGroups([
                 'إدارة الطلبات',

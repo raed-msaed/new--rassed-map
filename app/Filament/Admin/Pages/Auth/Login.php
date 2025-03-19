@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Filament\Pages\Auth;
+namespace App\Filament\Admin\Pages\Auth;
 
+use Filament\Pages\Auth\Login as FilamentLogin;
+use DiogoGPinto\AuthUIEnhancer\Pages\Auth\Concerns\HasCustomLayout;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 
-class Login extends \Filament\Pages\Auth\Login
+class Login extends FilamentLogin
 {
+    // protected static string $view = 'filament.auth.login';
+    //use HasCustomLayout;
     protected function getForms(): array
     {
         return [

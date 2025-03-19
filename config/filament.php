@@ -2,6 +2,7 @@
 
 return [
 
+    'custom_css' => 'public/css/filament/filament/filament-custom.css',
     /*
     |--------------------------------------------------------------------------
     | Broadcasting
