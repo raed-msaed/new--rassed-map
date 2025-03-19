@@ -1,7 +1,8 @@
 <?php
 
 return [
-    App\Providers\FilamentThemeServiceProvider::class,
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
