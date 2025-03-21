@@ -29,6 +29,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -37,6 +38,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
@@ -88,7 +90,7 @@ class AdminPanelProvider extends PanelProvider
                 'تسيير',
                 'تعريف المنظومة'
             ])
-            ->brandName('رصد الفضائية')
+            ->brandName('المراقبة الجوية بالطائرات بدون طيار')
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('4rem')
             ->favicon(asset('images/logo.png'))
@@ -117,7 +119,13 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
-            ]);
+            ])
+
+            ->renderHook(PanelsRenderHook::TOPBAR_START, function () {
+                return Blade::render('<div style="background-color: #ffff;color: #189ab4;padding: 5px 20px;text-align: center;border-bottom:2px solid ;font-size: 36px;margin: 0;font-weight: bold;">{{ $text }}</div>', [
+                    'text' => 'المراقبة الجوية بالطائرات بدون طيار',
+                ]);
+            });
     }
 
     public function boot()
