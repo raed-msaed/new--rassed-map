@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\PointResource\Pages;
+namespace App\Filament\Resources\PointsInteretResource\Pages;
 
-use App\Filament\Resources\PointResource;
+use App\Filament\Resources\PointsInteretResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditPoint extends EditRecord
+class EditPointsInteret extends EditRecord
 {
-    protected static string $resource = PointResource::class;
+    protected static string $resource = PointsInteretResource::class;
 
     protected function getHeaderActions(): array
     {

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('suivmissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mission_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('demande_id')->nullable()->constrained()->cascadeOnDelete();
             $table->dateTime('datedebut')->nullable();
             $table->dateTime('datefin')->nullable();
             $table->string('validate')->nullable();

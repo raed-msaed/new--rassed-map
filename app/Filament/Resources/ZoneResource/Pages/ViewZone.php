@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\PointResource\Pages;
+namespace App\Filament\Resources\ZoneResource\Pages;
 
-use App\Filament\Resources\PointResource;
+use App\Filament\Resources\ZoneResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewPoint extends ViewRecord
+class ViewZone extends ViewRecord
 {
-    protected static string $resource = PointResource::class;
+    protected static string $resource = ZoneResource::class;
 
     protected function getHeaderActions(): array
     {

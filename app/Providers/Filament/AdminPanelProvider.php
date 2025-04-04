@@ -134,9 +134,9 @@ class AdminPanelProvider extends PanelProvider
         Filament::registerResources([
             MissionValidResource::class,
         ]);
-        Mission::observe(MissionObserver::class);
+        // Mission::observe(MissionObserver::class);
         Suivmission::observe(SuivmissionObserver::class);
-        Point::observe(PointObserver::class);
+        // Point::observe(PointObserver::class);
     }
     protected $listen = [
         \App\Events\ModelChanged::class => [

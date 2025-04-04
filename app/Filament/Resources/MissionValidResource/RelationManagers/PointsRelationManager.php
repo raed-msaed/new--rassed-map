@@ -30,7 +30,7 @@ class PointsRelationManager extends RelationManager
                     ->label('إسم النقطة')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('latitude')
+                /*Forms\Components\TextInput::make('latitude')
                     ->label('خط الطول')
                     ->default(request()->get('latitude'))
                     ->required()
@@ -41,7 +41,7 @@ class PointsRelationManager extends RelationManager
                     ->default(request()->get('longitude'))
                     ->required()
                     ->extraInputAttributes(['style' => 'text-align:right'])
-                    ->extraAttributes(['dir' => 'ltr']),
+                    ->extraAttributes(['dir' => 'ltr']),*/
                 Forms\Components\Select::make('icon_id')
                     ->label('الأيقونة')
                     ->relationship('icon', 'name')
