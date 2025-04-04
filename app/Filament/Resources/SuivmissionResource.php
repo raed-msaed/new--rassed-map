@@ -7,6 +7,7 @@ use App\Filament\Resources\SuivmissionResource\RelationManagers;
 use App\Models\Mission;
 use App\Models\Point;
 use App\Models\Points_interet;
+use App\Models\Suiv_mission;
 use App\Models\Suivmission;
 use Filament\Forms\Set;
 use Filament\Forms;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SuivmissionResource extends Resource
 {
-    protected static ?string $model = Suivmission::class;
+    protected static ?string $model = Suiv_mission::class;
 
     protected static ?string $navigationIcon = 'fas-plane-circle-check';
 

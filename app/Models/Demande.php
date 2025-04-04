@@ -24,6 +24,6 @@ class Demande extends Model
     }
     public function suivmission(): HasMany
     {
-        return $this->hasMany(Suivmission::class);
+        return $this->hasMany(Suiv_mission::class);
     }
 }

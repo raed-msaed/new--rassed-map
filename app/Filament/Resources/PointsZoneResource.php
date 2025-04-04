@@ -20,6 +20,13 @@ class PointsZoneResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'نقاط تحديد المنطقة ';
+
+    protected static ?string $modelLabel = 'نقطة';
+
+    protected static ?string $pluralModelLabel = 'النقاط';
+
+    protected static ?int $navigationSort = 4;
     public static function form(Form $form): Form
     {
         return $form

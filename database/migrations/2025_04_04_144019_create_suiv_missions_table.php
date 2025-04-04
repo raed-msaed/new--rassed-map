@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('suiv_exec_missions', function (Blueprint $table) {
+        Schema::create('suiv_missions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plannig_mission_id')->nullable()->constrained()->onDelete();
-            $table->boolean('execution');
+            $table->foreignId('points_interet_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->boolean('execution')->nullable();
             $table->string('remarque_exec');
             $table->dateTime('date_execution');
             $table->dateTime('date_finished');
             $table->string('description_image');
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('suiv_exec_missions');
+        Schema::dropIfExists('suiv_missions');
     }
 };

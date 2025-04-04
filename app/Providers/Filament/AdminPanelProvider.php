@@ -9,6 +9,7 @@ use App\Filament\Widgets\SuivMissionWidget;
 use App\Models\Icon;
 use App\Models\Mission;
 use App\Models\Point;
+use App\Models\Suiv_mission;
 use App\Models\Suivmission;
 use App\Observers\HistoryObserver;
 use App\Observers\MissionObserver;
@@ -135,7 +136,7 @@ class AdminPanelProvider extends PanelProvider
             MissionValidResource::class,
         ]);
         // Mission::observe(MissionObserver::class);
-        Suivmission::observe(SuivmissionObserver::class);
+        Suiv_mission::observe(SuivmissionObserver::class);
         // Point::observe(PointObserver::class);
     }
     protected $listen = [

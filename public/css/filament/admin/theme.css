@@ -5919,7 +5919,7 @@ input:focus-visible+.dark\:\[input\:focus-visible\+\&\]\:ring-white\/20:is(.dark
 
 /* 🔥 Fond du sidebar */
 .fi-sidebar {
-    background-color: #4CC9FE !important;
+    background-color: #c0dcf0 !important;
     /* Bleu profond pour contraster avec l’orange */
 }
 
@@ -5930,13 +5930,13 @@ input:focus-visible+.dark\:\[input\:focus-visible\+\&\]\:ring-white\/20:is(.dark
 
 /* 🎨 Texte des éléments du sidebar */
 .fi-sidebar-item {
-    color: #005bea !important;
+    color: #93aed9 !important;
     /* Blanc cassé pour bonne lisibilité */
 }
 
 /* 🚀 Élément actif du sidebar */
 .fi-sidebar-item-active {
-    color: #09a9c8 !important;
+    color: #c0dcf0 !important;
     /* Orange vif */
     font-weight: bold !important;
 }

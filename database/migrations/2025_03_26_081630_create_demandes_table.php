@@ -24,6 +24,9 @@ return new class extends Migration
             $table->string('objectif_mission')->nullable();
             $table->string('signe')->nullable();
             $table->boolean('accordgrci')->nullable();
+            $table->boolean('accord_emaa')->nullable();
+            $table->string('remarque_accord_emaa')->nullable();
+            $table->string('moyenne')->nullable();
             $table->string('remarque')->nullable();
             $table->timestamps();
         });

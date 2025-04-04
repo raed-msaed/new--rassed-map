@@ -20,6 +20,13 @@ class PointsInteretResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'نقاط الإهتمام';
+
+    protected static ?string $modelLabel = 'نقطة';
+
+    protected static ?string $pluralModelLabel = 'النقاط';
+
+    protected static ?int $navigationSort = 5;
     public static function form(Form $form): Form
     {
         return $form
