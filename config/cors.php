@@ -15,11 +15,12 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', '*', 'livewire/*', 'storage/*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '*', 'livewire/*', 'storage/*', 'styles/*', 'data/*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://rassed-map.com','http://rassed-map.com'],
+    'allowed_origins' => ['https://rassed-map.com', 'http://rassed-map.com'],
+    #'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 

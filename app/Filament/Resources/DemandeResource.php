@@ -2,60 +2,43 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MissionResource\Pages;
-use App\Filament\Resources\MissionResource\RelationManagers;
-use App\Filament\Resources\MissionResource\RelationManagers\PointsRelationManager;
-use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionRelationManager;
-use App\Filament\Resources\MissionResource\RelationManagers\SuivmissionsRelationManager;
-use App\Filament\Resources\MissionResource\Widgets\MissionStats;
-use App\Models\Mission;
+use App\Filament\Resources\DemandeResource\Pages;
+use App\Filament\Resources\DemandeResource\RelationManagers;
+use App\Models\Demande;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Radio;
 
-class MissionResource extends Resource
+class DemandeResource extends Resource
 {
-    protected static ?string $model = Mission::class;
+    protected static ?string $model = Demande::class;
 
     protected static ?string $navigationIcon = 'fas-list-check';
-    //protected static ?string $navigationIcon = 'fas-plane-departure';
 
     protected static ?string $navigationLabel = 'الطلبات الواردة';
 
-    protected static ?string $modelLabel = 'طلب مهمة';
+    protected static ?string $modelLabel = 'طلب';
 
     protected static ?string $pluralModelLabel = 'الطلبات';
 
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'إدارة الطلبات'; // Group name
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return 'جميع الطلبات';
-    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('refmission')
-                    ->label('رمز المهمة')
-                    ->maxLength(255)
-                    ->default(null),
+
                 Forms\Components\TextInput::make('refdemande')
                     ->label('مرجع الطلب')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('datedemande')
-                    ->label('تاريخ المطلب')
+                    ->label('تاريخ الطلب')
                     ->extraInputAttributes(['style' => 'text-align:right'])
                     ->native(false)
                     ->displayFormat('Y/m/d')
@@ -64,6 +47,10 @@ class MissionResource extends Resource
                     ->label('الجهة')
                     ->relationship('organisation', 'name')
                     ->required(),
+                Forms\Components\TextInput::make('refmission')
+                    ->label('رمز المهمة')
+                    ->maxLength(255)
+                    ->default(null),
                 Forms\Components\DatePicker::make('datedebutmission')
                     ->extraInputAttributes(['style' => 'text-align:right'])
                     ->native(false)
@@ -86,14 +73,6 @@ class MissionResource extends Resource
                     ->label('الهدف من المهمة')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('zone')
-                    ->label('المنطقة')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('besoinrenseignement')
-                    ->label('حاجيات الإستعلام')
-                    ->maxLength(255)
-                    ->default(null),
                 Forms\Components\TextInput::make('signe')
                     ->label('المؤشرات')
                     ->maxLength(255)
@@ -104,16 +83,7 @@ class MissionResource extends Resource
                         'نعم' => 'نعم',
                         'لا' => 'لا',
                     ]),
-                Forms\Components\Select::make('organisationaccord_id')
-                    ->label('الجهة المصادقة')
-                    ->relationship('organisationaccord', 'name'),
-                Radio::make('statusaccord')
-                    ->label('مصادقة الجهة')
-                    ->options([
-                        'نعم' => 'نعم',
-                        'لا' => 'لا',
-                    ]),
-                Forms\Components\TextInput::make('remarqueaccord')
+                Forms\Components\TextInput::make('remarque')
                     ->label('الملاحظات')
                     ->maxLength(255)
                     ->default(null),
@@ -124,19 +94,20 @@ class MissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('refmission')
-                    ->label('رمز المهمة')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('refdemande')
                     ->label('مرجع الطلب')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('datedemande')
-                    ->label('تاريخ المطلب')
+                    ->label('تاريخ الطلب')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('organisation.name')
                     ->label('الجهة')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('refmission')
+                    ->label('رمز المهمة')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('datedebutmission')
                     ->label('تاريخ بداية المهمة')
                     ->date()
@@ -153,25 +124,13 @@ class MissionResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('objectif_mission')
                     ->label('الهدف من المهمة'),
-                Tables\Columns\TextColumn::make('zone')
-                    ->label('المنطقة')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('besoinrenseignement')
-                    ->label('حاجيات الإستعلام')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('accordgrci')
                     ->label('مصادقة مركز الإستطلاع')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('organisationaccord.name')
-                    ->label('الجهة المصادقة')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('statusaccord')
-                    ->label('المصادقة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('signe')
                     ->label('المؤشرات')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('remarqueaccord')
+                Tables\Columns\TextColumn::make('remarque')
                     ->label('الملاحظات')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -202,18 +161,17 @@ class MissionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PointsRelationManager::class,
-            SuivmissionRelationManager::class
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMissions::route('/'),
-            'create' => Pages\CreateMission::route('/create'),
-            'view' => Pages\ViewMission::route('/{record}'),
-            'edit' => Pages\EditMission::route('/{record}/edit'),
+            'index' => Pages\ListDemandes::route('/'),
+            'create' => Pages\CreateDemande::route('/create'),
+            'view' => Pages\ViewDemande::route('/{record}'),
+            'edit' => Pages\EditDemande::route('/{record}/edit'),
         ];
     }
 }

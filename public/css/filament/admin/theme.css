@@ -5919,7 +5919,7 @@ input:focus-visible+.dark\:\[input\:focus-visible\+\&\]\:ring-white\/20:is(.dark
 
 /* 🔥 Fond du sidebar */
 .fi-sidebar {
-    background-color: #c0dcf0 !important;
+    background-color: #4CC9FE !important;
     /* Bleu profond pour contraster avec l’orange */
 }
 
@@ -5994,4 +5994,12 @@ input:focus-visible+.dark\:\[input\:focus-visible\+\&\]\:ring-white\/20:is(.dark
 
 .fi-section-content {
     background-color: #ffffff !important;
+}
+
+.fi-simple-layout {
+    @apply bg-cyan-100/50;
+}
+
+.fi-simple-main {
+    @apply bg-emerald-100/50;
 }

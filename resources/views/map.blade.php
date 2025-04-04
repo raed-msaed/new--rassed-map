@@ -32,10 +32,10 @@
 
   <script>
     // Initialiser la carte
-    var map = L.map('map').setView([36.8065, 10.1815], 13); // Coordonnées de Tunis
+    var map = L.map('map').setView([35.50707, 8.76784], 17); // Coordonnées de Tunis
 
     // Utiliser TileServer via Docker
-    L.tileLayer('https://rassed-map.com/styles/klokantech-basic/{z}/{x}/{y}.png', {
+    L.tileLayer('https://localhost:8080/data/centre-tunisie-z18/{z}/{x}/{y}.png', {
       maxZoom: 18,
     }).addTo(map);
 

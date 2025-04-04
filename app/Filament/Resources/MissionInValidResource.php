@@ -8,6 +8,7 @@ use App\Filament\Resources\MissionInValidResource\RelationManagers\PointsRelatio
 use App\Filament\Resources\MissionInValidResource\RelationManagers\SuivmissionsRelationManager;
 use App\Models\Mission;
 use App\Models\MissionInValid;
+use App\Models\Suivmission;
 use Filament\Forms;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MissionInValidResource extends Resource
 {
-    protected static ?string $model = Mission::class;
+    protected static ?string $model = Suivmission::class;
 
     protected static ?string $navigationIcon = 'fas-plane-circle-exclamation';
 

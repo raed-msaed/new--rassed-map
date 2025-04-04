@@ -74,10 +74,11 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize your Leaflet map here
-      var map = L.map('map').setView([36.8065, 10.1815], 13); // Coordonnées de Tunis
+      var map = L.map('map').setView([35.50707, 8.76784], 17); // Coordonnées de Tunis
       // Add your tile layer
-      L.tileLayer('https://rassed-map.com/styles/test-style/{z}/{x}/{y}.png', {
-        maxZoom: 20,
+      // L.tileLayer('https://rassed-map.com/styles/klokantech-basic/{z}/{x}/{y}.png', {
+      L.tileLayer('http://localhost:8080/data/centre-tunisie-z18/{z}/{x}/{y}.png', {
+        maxZoom: 17,
         attribution: '© OpenStreetMap contributors'
       }).addTo(map);
 
@@ -132,36 +133,37 @@
               iconSize: [32, 32],
               iconAnchor: [16, 32],
               popupAnchor: [0, -32]
-            });      // Function to search for coordinates
-      function searchCoordinates() {
-        const input = document.getElementById('coordInput').value.trim();
-        const [lat, lng] = input.split(',').map(coord => parseFloat(coord));
+            }); // Function to search for coordinates
+            function searchCoordinates() {
+              const input = document.getElementById('coordInput').value.trim();
+              const [lat, lng] = input.split(',').map(coord => parseFloat(coord));
 
-        if (isNaN(lat) || isNaN(lng)) {
-          alert("Please enter valid coordinates in the format 'lat,lng'.");
-          return;
-        }
+              if (isNaN(lat) || isNaN(lng)) {
+                alert("Please enter valid coordinates in the format 'lat,lng'.");
+                return;
+              }
 
-        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
-          alert(
-            "Coordinates out of bounds. Latitude must be between -90 and 90, and longitude between -180 and 180.");
-          return;
-        }
+              if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                alert(
+                  "Coordinates out of bounds. Latitude must be between -90 and 90, and longitude between -180 and 180."
+                );
+                return;
+              }
 
-        // Set map view to the entered coordinates
-        map.setView([lat, lng], 13);
+              // Set map view to the entered coordinates
+              map.setView([lat, lng], 13);
 
-        // Add or update marker
-        if (marker) {
-          marker.setLatLng([lat, lng]);
-        } else {
-          marker = L.marker([lat, lng]).addTo(map);
-        }
-      }
+              // Add or update marker
+              if (marker) {
+                marker.setLatLng([lat, lng]);
+              } else {
+                marker = L.marker([lat, lng]).addTo(map);
+              }
+            }
 
-      document.getElementById('coordInput').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') searchCoordinates();
-      });
+            document.getElementById('coordInput').addEventListener('keydown', function(e) {
+              if (e.key === 'Enter') searchCoordinates();
+            });
 
             // Create a marker for each point
             var marker = L.marker([point.latitude, point.longitude], {

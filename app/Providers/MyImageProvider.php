@@ -15,7 +15,7 @@ class MyImageProvider implements ProvidesImages
     public function getImage(): Image
     {
         return new Image(
-            'url("' . asset('images/swisnl/filament-backgrounds/curated-by-swis/13.jpg') . '")', // Utilise une image locale C:\xampp\htdocs\new--rassed-map\public\images\swisnl\filament-backgrounds
+            'url("' . asset('images/Zazzle - Digital Business Card - Front.png') . '")', // Utilise une image locale C:\xampp\htdocs\new--rassed-map\public\images\swisnl\filament-backgrounds
             'Photo by ARSD - DTS' // Attribution (facultatif)
         );
     }

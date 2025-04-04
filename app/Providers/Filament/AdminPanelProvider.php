@@ -90,8 +90,8 @@ class AdminPanelProvider extends PanelProvider
                 'تسيير',
                 'تعريف المنظومة'
             ])
-            ->brandName('المراقبة الجوية بالطائرات بدون طيار')
-            ->brandLogo(asset('images/logo.png'))
+            ->brandName(' رصد بالطائرات بدون طيار')
+            ->brandLogo(asset('images/Zazzle - Digital Business Card - Front (2).png'))
             ->brandLogoHeight('4rem')
             ->favicon(asset('images/logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -122,8 +122,8 @@ class AdminPanelProvider extends PanelProvider
             ])
 
             ->renderHook(PanelsRenderHook::TOPBAR_START, function () {
-                return Blade::render('<div style="background-color: #ffff;color: #189ab4;padding: 5px 20px;text-align: center;border-bottom:2px solid ;font-size: 36px;margin: 0;font-weight: bold;">{{ $text }}</div>', [
-                    'text' => 'المراقبة الجوية بالطائرات بدون طيار',
+                return Blade::render('<div style="background-color: #ffff;color: #0118D8;padding: 5px 20px;text-align: center;border-bottom:2px solid ;font-size: 36px;margin: 0;font-weight: bold;">{{ $text }}</div>', [
+                    'text' => ' رصد بالطائرات بدون طيار',
                 ]);
             });
     }

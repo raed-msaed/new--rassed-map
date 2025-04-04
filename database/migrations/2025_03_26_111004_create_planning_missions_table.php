@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('points_interets', function (Blueprint $table) {
+        Schema::create('planning_missions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('zone_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
-            $table->string('description');
+            $table->foreignId('demande_mission_id')->nullable()->constrained()->onDelete();
+            $table->boolean('accord_emaa');
+            $table->string('accord_remarque');
+            $table->date('date');
+            $table->string('moyenne');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('points_interets');
+        Schema::dropIfExists('planning_missions');
     }
 };

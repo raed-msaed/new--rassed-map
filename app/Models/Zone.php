@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Zone extends Model
 {
@@ -10,18 +13,13 @@ class Zone extends Model
 
     protected $guarded = [];
 
-    public function mission(): BelongsTo
+    public function demande(): BelongsTo
     {
-        return $this->belongsTo(Mission::class);
+        return $this->belongsTo(Demande::class);
     }
 
-    public function points_zones(): HasMany
+    public function zone_interet(): HasMany
     {
-        return $this->hasMany(Points_zone::class);
-    }
-
-    public function points_interet(): HasMany
-    {
-        return $this->hasMany(Points_interet::class);
+        return $this->hasMany(Zone_interet::class);
     }
 }

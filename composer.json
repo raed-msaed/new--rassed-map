@@ -17,6 +17,7 @@
         "filament/forms": "^3.2",
         "filament/widgets": "^3.2",
         "flowframe/laravel-trend": "^0.3.0",
+        "intervention/image": "*",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "mallardduck/blade-boxicons": "^2.4",

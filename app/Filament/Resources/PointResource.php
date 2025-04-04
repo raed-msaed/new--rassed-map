@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PointResource extends Resource
 {
-    protected static ?string $model = Point::class;
+    ///protected static ?string $model = Point::class;
 
     protected static ?string $navigationIcon = 'bx-map';
 
@@ -50,7 +50,7 @@ class PointResource extends Resource
                     ->label('إسم النقطة')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('latitude')
+                /*  Forms\Components\TextInput::make('latitude')
                     ->label('خط الطول')
                     ->default(request()->get('latitude'))
                     ->required()
@@ -61,7 +61,7 @@ class PointResource extends Resource
                     ->default(request()->get('longitude'))
                     ->required()
                     ->extraInputAttributes(['style' => 'text-align:right'])
-                    ->extraAttributes(['dir' => 'ltr']),
+                    ->extraAttributes(['dir' => 'ltr']),*/
                 Forms\Components\Select::make('icon_id')
                     ->label('الأيقونة')
                     ->relationship('icon', 'name')
@@ -120,7 +120,7 @@ class PointResource extends Resource
     public static function getRelations(): array
     {
         return [
-            SuivmissionRelationManager::class,
+            // SuivmissionRelationManager::class,
         ];
     }
 

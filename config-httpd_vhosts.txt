@@ -1,0 +1,39 @@
+<VirtualHost *:80>
+    ServerName rassed-map.com
+    DocumentRoot "C:/xampp/htdocs/new--rassed-map/public"
+
+    <Directory "C:/xampp/htdocs/new--rassed-map/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Proxy TileServer-GL requests
+    ProxyPass /styles/ http://localhost:8080/styles/
+    ProxyPassReverse /styles/ http://localhost:8080/styles/
+
+    # Allow WebSockets if needed
+    ProxyRequests Off
+    AllowEncodedSlashes NoDecode
+
+    <Proxy *>
+        Require all granted
+    </Proxy>
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName rassed-map.com
+    DocumentRoot "C:/xampp/htdocs/new--rassed-map/public"
+
+    SSLEngine on
+    SSLCertificateFile "C:/xampp/htdocs/new--rassed-map/config/rassed-map.crt"
+    SSLCertificateKeyFile "C:/xampp/htdocs/new--rassed-map/config/rassed-map.key"
+
+    <Directory "C:/xampp/htdocs/new--rassed-map/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Proxy requests to TileServer-GL
+    ProxyPass /styles/ http://localhost:8080/styles/
+    ProxyPassReverse /styles/ http://localhost:8080/styles/
+</VirtualHost>

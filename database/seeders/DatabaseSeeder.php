@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OrganisationSeeder::class);
         $this->call(IconSeeder::class);
         $this->call(OrganisationaccordSeeder::class);
+        $this->call(Type_missionSeeder::class);
     }
 }

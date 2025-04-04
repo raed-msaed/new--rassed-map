@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('points_zones', function (Blueprint $table) {
+        Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('zone_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
+            $table->foreignId('demande_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('nom');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('points_zones');
+        Schema::dropIfExists('zones');
     }
 };

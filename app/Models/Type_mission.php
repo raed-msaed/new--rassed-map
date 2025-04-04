@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Points_interet extends Model
+class Type_mission extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function zone(): BelongsTo
+    public function demande(): HasMany
     {
-        return $this->belongsTo(Zone::class);
+        return $this->hasMany(Demande::class);
     }
 }

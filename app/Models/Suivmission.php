@@ -13,13 +13,8 @@ class Suivmission extends Model
 
     protected $guarded = [];
 
-    public function mission(): BelongsTo
+    public function demande(): BelongsTo
     {
-        return $this->belongsTo(Mission::class)->orderBy('id', 'desc');
-    }
-
-    public function point(): BelongsTo
-    {
-        return $this->belongsTo(Point::class)->orderBy('id', 'desc');
+        return $this->belongsTo(Demande::class)->orderBy('id', 'desc');
     }
 }
