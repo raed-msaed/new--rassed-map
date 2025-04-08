@@ -14,10 +14,10 @@ class Icon extends Model
 
     protected $guarded = [];
 
-    public function icon(): HasMany
-    {
-        return $this->hasMany(Point::class);
-    }
+    // public function icon(): HasMany
+    // {
+    //     return $this->hasMany(Point::class);
+    // }
 
     protected static function booted(): void
     {

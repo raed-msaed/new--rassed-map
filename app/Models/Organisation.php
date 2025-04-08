@@ -12,8 +12,8 @@ class Organisation extends Model
 
     protected $guarded = [];
 
-    public function demande(): HasMany
+    /* public function demande(): HasMany
     {
         return $this->hasMany(Demande::class);
-    }
+    }*/
 }
