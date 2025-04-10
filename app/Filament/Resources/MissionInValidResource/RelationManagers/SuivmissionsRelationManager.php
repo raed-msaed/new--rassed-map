@@ -43,7 +43,7 @@ class SuivmissionsRelationManager extends RelationManager
                         }
 
                         // Fetch points related to the mission
-                        return \App\Models\Point::where('mission_id', $missionId)
+                        return \App\Models\Demande::where('mission_id', $missionId)
                             ->pluck('title', 'id')
                             ->toArray();
                     })

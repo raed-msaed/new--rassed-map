@@ -78,8 +78,14 @@
       // Add your tile layer
       // L.tileLayer('https://rassed-map.com/styles/klokantech-basic/{z}/{x}/{y}.png', {
       L.tileLayer('http://localhost:8080/data/centre-tunisie-z18/{z}/{x}/{y}.png', {
-        maxZoom: 17,
+        minZoom: 10,
+        maxZoom: 20,
         attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Contrôles de zoom
+      L.control.zoom({
+        position: 'topright'
       }).addTo(map);
 
       // Convert decimal degrees to DMS format

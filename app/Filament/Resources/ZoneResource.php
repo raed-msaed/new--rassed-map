@@ -33,7 +33,7 @@ class ZoneResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('mission_id')
                     ->numeric(),
-                Forms\Components\TextInput::make('nom')
+                Forms\Components\TextInput::make('name')
                     ->required(),
             ]);
     }
@@ -45,7 +45,7 @@ class ZoneResource extends Resource
                 Tables\Columns\TextColumn::make('mission_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('nom')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

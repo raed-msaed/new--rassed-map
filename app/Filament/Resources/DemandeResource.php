@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DemandeResource\Pages;
 use App\Filament\Resources\DemandeResource\RelationManagers;
+use App\Filament\Resources\DemandeResource\RelationManagers\ZoneRelationManager;
 use App\Models\Demande;
 use Filament\Forms;
 use Filament\Forms\Components\Radio;
@@ -43,12 +44,12 @@ class DemandeResource extends Resource
                     ->native(false)
                     ->displayFormat('Y/m/d')
                     ->required(),
-                Forms\Components\Select::make('organisation_id')
+                Forms\Components\Select::make('organisationdemande_id')
                     ->label('الجهة')
-                    ->relationship('organisation', 'name')
+                    ->relationship('organisationdemande', 'name')
                     ->required(),
                 Forms\Components\TextInput::make('refmission')
-                    ->label('رمز المهمة')
+                    ->label('رمز الطلب')
                     ->maxLength(255)
                     ->default(null),
                 Forms\Components\DatePicker::make('datedebutmission')
@@ -65,9 +66,9 @@ class DemandeResource extends Resource
                     ->label('التوقيت')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('type_mission')
+                Forms\Components\Select::make('type_mission_id')
                     ->label('صنف المهمة')
-                    ->maxLength(255)
+                    ->relationship('type_mission', 'name')
                     ->default(null),
                 Forms\Components\TextInput::make('objectif_mission')
                     ->label('الهدف من المهمة')
@@ -80,9 +81,10 @@ class DemandeResource extends Resource
                 Radio::make('accordgrci')
                     ->label('مصادقة مركز الإستطلاع')
                     ->options([
-                        'نعم' => 'نعم',
-                        'لا' => 'لا',
-                    ]),
+                        '1' => 'نعم',
+                        '0' => 'لا',
+                    ])
+                    ->default('0'),
                 Forms\Components\TextInput::make('remarque')
                     ->label('الملاحظات')
                     ->maxLength(255)
@@ -101,32 +103,35 @@ class DemandeResource extends Resource
                 Tables\Columns\TextColumn::make('datedemande')
                     ->label('تاريخ الطلب')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('organisation.name')
+                    ->sortable()
+                    ->formatStateUsing(fn ($state) => format_arabic_date($state)),
+                Tables\Columns\TextColumn::make('organisationdemande.name')
                     ->label('الجهة')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('refmission')
-                    ->label('رمز المهمة')
+                    ->label('رمز الطلب')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('datedebutmission')
                     ->label('تاريخ بداية المهمة')
                     ->date()
+                    ->formatStateUsing(fn ($state) => format_arabic_date($state))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datefinmission')
                     ->label('تاريخ نهاية المهمة')
                     ->date()
+                    ->formatStateUsing(fn ($state) => format_arabic_date($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('timemission')
                     ->label('التوقيت'),
-                Tables\Columns\TextColumn::make('type_mission')
+                Tables\Columns\TextColumn::make('type_mission.name')
                     ->label('صنف المهمة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('objectif_mission')
                     ->label('الهدف من المهمة'),
                 Tables\Columns\TextColumn::make('accordgrci')
                     ->label('مصادقة مركز الإستطلاع')
-                    ->searchable(),
+                    ->formatStateUsing(fn ($state) => $state ? 'نعم' : 'لا'),
                 Tables\Columns\TextColumn::make('signe')
                     ->label('المؤشرات')
                     ->searchable(),
@@ -161,7 +166,7 @@ class DemandeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ZoneRelationManager::class,
         ];
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('refdemande');
             $table->date('datedemande');
-            $table->foreignId('organisation_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('organisationdemande_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('refmission')->nullable();
             $table->foreignId('type_mission_id')->nullable()->constrained()->cascadeOnDelete();
             $table->date('datedebutmission')->nullable();
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('objectif_mission')->nullable();
             $table->string('signe')->nullable();
             $table->boolean('accordgrci')->nullable();
-            $table->boolean('accord_emaa')->nullable();
-            $table->string('remarque_accord_emaa')->nullable();
+            $table->boolean('organisationaccord')->nullable();
+            $table->string('remarque_accord')->nullable();
             $table->string('moyenne')->nullable();
             $table->string('remarque')->nullable();
             $table->timestamps();
