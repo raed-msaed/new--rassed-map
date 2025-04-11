@@ -12,8 +12,8 @@ class Points_zone extends Model
 
     protected $guarded = [];
 
-    public function zone(): BelongsTo
+    public function zone_interet(): BelongsTo
     {
-        return $this->belongsTo(Zone::class);
+        return $this->belongsTo(Zone_interet::class);
     }
 }

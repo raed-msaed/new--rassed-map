@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('points_interets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('zone_interet_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->decimal('latitude', 9 , 6);
+            $table->foreignId('icon_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->decimal('latitude', 9, 6);
             $table->decimal('longitude', 9, 6);
             $table->string('attributes');
             $table->timestamps();

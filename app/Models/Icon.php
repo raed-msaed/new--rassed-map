@@ -19,6 +19,11 @@ class Icon extends Model
     //     return $this->hasMany(Point::class);
     // }
 
+    public function points_interet(): HasMany
+    {
+        return $this->hasMany(Points_interet::class);
+    }
+
     protected static function booted(): void
     {
         static::deleting(function ($icon) {

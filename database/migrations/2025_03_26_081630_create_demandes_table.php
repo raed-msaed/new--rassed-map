@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('objectif_mission')->nullable();
             $table->string('signe')->nullable();
             $table->boolean('accordgrci')->nullable();
-            $table->boolean('organisationaccord')->nullable();
+            $table->foreignId('organisationaccord')->nullable()->constrained()->cascadeOnDelete();
             $table->string('remarque_accord')->nullable();
             $table->string('moyenne')->nullable();
             $table->string('remarque')->nullable();
