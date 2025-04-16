@@ -18,14 +18,13 @@ class Zone extends Model
         return $this->belongsTo(Demande::class);
     }
 
-    // Relation many-to-many avec Demande (comme zone d'intérêt)
-    public function demandesInteret()
-    {
-        return $this->belongsToMany(Demande::class, 'demande_zone_interet', 'zone_id', 'demande_id');
-    }
-
-    public function zone_interet(): HasMany
+    public function zoneInterets(): HasMany
     {
         return $this->hasMany(Zone_interet::class);
+    }
+
+    public function suiv_mission(): HasMany
+    {
+        return $this->hasMany(Suiv_mission::class);
     }
 }

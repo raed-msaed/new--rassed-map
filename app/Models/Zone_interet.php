@@ -26,4 +26,9 @@ class Zone_interet extends Model
     {
         return $this->hasMany(Points_interet::class);
     }
+
+    public function suiv_mission(): HasMany
+    {
+        return $this->hasMany(Suiv_mission::class);
+    }
 }

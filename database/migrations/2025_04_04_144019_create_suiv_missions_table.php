@@ -16,14 +16,10 @@ return new class extends Migration
             $table->foreignId('demande_id')->nullable()->constrained()->cascadeOnDelete();
             $table->boolean('execution')->nullable();
             $table->string('remarque_exec');
-            $table->dateTime('date_execution');
-            $table->dateTime('date_finished');
+            $table->dateTime('date_debut_execution');
+            $table->dateTime('date_fin_execution');
             $table->string('moyenne')->nullable();
-            $table->string('description_image');
-            $table->string('reconnaissance')->nullable();
-            $table->string('photoaerienne')->nullable();
-            $table->string('photogeoaerienne')->nullable();
-            $table->string('video')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

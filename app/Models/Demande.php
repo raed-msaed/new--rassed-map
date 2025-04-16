@@ -18,10 +18,9 @@ class Demande extends Model
         return $this->hasMany(Zone::class);
     }
 
-    // Relation many-to-many avec Zone (zones d'intérêt)
-    public function zonesInteret()
+    public function type_mission(): BelongsTo
     {
-        return $this->belongsToMany(Zone::class, 'demande_zone_interet', 'demande_id', 'zone_id');
+        return $this->belongsTo(Type_mission::class);
     }
 
     public function organisationdemande(): BelongsTo
@@ -29,14 +28,25 @@ class Demande extends Model
         return $this->belongsTo(Organisationdemande::class);
     }
 
+    // Accès direct aux zones d'intérêt via les zones
+    public function zonesInterets()
+    {
+        return $this->hasManyThrough(
+            Zone_interet::class,
+            Zone::class,
+            'demande_id', // Clé étrangère dans zones
+            'zone_id', // Clé étrangère dans zones_interets (à confirmer selon votre structure)
+            'id', // Clé locale dans demands
+            'id' // Clé locale dans zones
+        );
+    }
+
+
     public function organisationaccord(): BelongsTo
     {
         return $this->belongsTo(Organisationaccord::class);
     }
-    public function type_mission(): BelongsTo
-    {
-        return $this->belongsTo(Type_mission::class);
-    }
+
     public function suivmission(): HasMany
     {
         return $this->hasMany(Suiv_mission::class);
