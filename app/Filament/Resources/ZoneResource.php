@@ -19,22 +19,16 @@ class ZoneResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'المناطق المسجلة';
-
-    protected static ?string $modelLabel = 'منطقة';
-
-    protected static ?string $pluralModelLabel = 'المناطق';
-
-    protected static ?int $navigationSort = 2;
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('mission_id')
-                    ->numeric(),
+                Forms\Components\Select::make('demande_id')
+                    ->relationship('demande', 'id')
+                    ->default(null),
                 Forms\Components\TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -42,7 +36,7 @@ class ZoneResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('mission_id')
+                Tables\Columns\TextColumn::make('demande.id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')

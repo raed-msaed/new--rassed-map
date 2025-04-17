@@ -20,7 +20,7 @@ class Zone extends Model
 
     public function zoneInterets(): HasMany
     {
-        return $this->hasMany(Zone_interet::class);
+        return $this->hasMany(Zone_interet::class, 'zone_id');
     }
 
     public function suiv_mission(): HasMany

@@ -21,60 +21,102 @@ class ZoneRelationManager extends RelationManager
     protected static ?string $modelLabel = 'منطقة';
 
     protected static ?string $pluralModelLabel = 'قائمة المناطق';
+
     public function form(Form $form): Form
     {
         return $form
-            ->schema([
-                /*Forms\Components\TextInput::make('id')
+            /* ->schema([
+                Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),*/
+                    ->maxLength(255),
+            ]);*/
+            ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('إسم المنطقة')
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
 
-                /*  Forms\Components\Select::make('zone_id')
-                    ->label('Zone principale')
-                    ->relationship('zone', 'name')
-                    ->required(),*/
+                // Section pour les zones d'intérêt
+                Forms\Components\Section::make('مناطق الإهتمام')
+                    ->schema([
+                        Forms\Components\Repeater::make('zoneInterets')
+                            ->relationship()
+                            ->label('')
+                            ->schema([
+                                Forms\Components\TextInput::make('attributes')
+                                    ->label('رمز منطقة الإهتمام')
+                                    ->required(),
 
-                // Zones d'intérêt (many-to-many)
-                Forms\Components\Select::make('zonesInteret')
-                    ->label('منطقة الإهتمام')
-                    ->relationship('zonesInteret', 'attributes')
-                    ->multiple()
-                    ->preload()
-                    ->searchable(),
+                                // Points du contour (polygone)
+                                Forms\Components\Repeater::make('points_zone')
+                                    ->relationship()
+                                    ->label('نقاط حدودية منطقة الإهتمام')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('latitude')
+                                            ->label('خط العرض')
+                                            ->numeric()
+                                            ->required(),
+                                        Forms\Components\TextInput::make('longitude')
+                                            ->label('خط الطول')
+                                            ->numeric()
+                                            ->required(),
+                                    ])
+                                    ->columns(2)
+                                    ->columnSpanFull(),
+
+                                // Points d'intérêt spécifiques
+                                Forms\Components\Repeater::make('points_interet')
+                                    ->relationship()
+                                    ->label('نقاط الإهتمام')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('latitude')
+                                            ->label('خط العرض')
+                                            ->numeric()
+                                            ->required(),
+                                        Forms\Components\TextInput::make('longitude')
+                                            ->label('خط الطول')
+                                            ->numeric()
+                                            ->required(),
+                                        Forms\Components\TextInput::make('attributes')
+                                            ->label('وصف النقطة'),
+                                    ])
+                                    ->columns(3)
+                                    ->columnSpanFull()
+                            ])
+                            ->columnSpanFull()
+                            ->itemLabel(fn (array $state) => $state['name_varchar'] ?? 'إدخال منطقة إهتمام')
+                            ->collapsible()
+                            ->collapsed()
+                            ->grid(2)
+                    ])
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            // ->recordTitleAttribute('name')
+            ->modifyQueryUsing(fn ($query) => $query->withCount('zoneInterets as zone_interets_count'))
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ع/ر'),
-                /* Tables\Columns\TextColumn::make('name')
-                    ->label('إسم المنطقة')
-                    ->searchable(),*/
-
-                // Zone principale
                 Tables\Columns\TextColumn::make('name')
                     ->label('إسم المنطقة')
-                    ->sortable()
                     ->searchable(),
 
-                // Zones d'intérêt (affichage sous forme de tags)
-                Tables\Columns\TextColumn::make('zonesInteret.name')
-                    ->label('منطقة الإهتمام')
+                Tables\Columns\TextColumn::make('zone_interets_count')
+                    ->label('مناطق الإهتمام')
                     ->badge()
-                    ->separator(','),
+                    ->color('success'),
+
+                Tables\Columns\TextColumn::make('zoneInterets.attributes')
+                    ->label('رمز منطقة الإهتمام')
+                    ->listWithLineBreaks(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->label('إضافة منطقة'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Zone_interet extends Model
 {
     use HasFactory;
-
+    protected $table = 'zone_interets'; // Nom exact de votre table
     protected $guarded = [];
 
     public function zone(): BelongsTo
