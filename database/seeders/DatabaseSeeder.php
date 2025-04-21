@@ -26,8 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CitySeeder::class);
         $this->call(CategorygradeSeeder::class);
         $this->call(GradeSeeder::class);
-        $this->call(OrganisationSeeder::class);
+        $this->call(Organisationdemande::class);
         $this->call(IconSeeder::class);
         $this->call(OrganisationaccordSeeder::class);
+        $this->call(Type_missionSeeder::class);
     }
 }

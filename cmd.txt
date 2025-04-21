@@ -2,11 +2,13 @@ composer create-project --prefer-dist laravel/laravel rassed-map
 php artisan key:generate
 php artisan make:model
 php artisan migrate:fresh --seed
+php artisan make:filament-relation-manager DemandeResource Zone id  
 
 composer require filament/filament:"^3.2.52"
 php artisan filament:install --panels
 php artisan storage:link  -> activated public storage
 php artisan make:filament-resource Icon --generate --view
+php artisan make:filament-relation-manager DemandeResource Zone id  
 composer require bezhansalleh/filament-shield
 php artisan vendor:publish --tag=filament-shield-config
 php artisan migrate:fresh --seed
@@ -15,6 +17,7 @@ php artisan shield:install
 npm install leaflet
 php artisan make:controller MapController
 
+php artisan optimize:clear (clear All)
 ----CMD-----
 php artisan key:generate
 php artisan storage:link  -> activated public storage
@@ -52,3 +55,6 @@ save to github:
 $ git add .
 $ git commit -m "final save"
 $ git push -u origin main
+
+
+

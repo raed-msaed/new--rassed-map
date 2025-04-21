@@ -86,3 +86,7 @@ protected static function booted(): void
                     ->required(),
 
 
+arabic tunisie format data :
+->formatStateUsing(fn ($state) => format_arabic_date($state))
+
+

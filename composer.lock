@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ed22f7a3e768c5c44bb061bb29d5332",
+    "content-hash": "dcd76aefdd09364daadc186d5381915a",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -687,6 +687,85 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
             "time": "2024-07-08T12:26:09+00:00"
+        },
+        {
+            "name": "diogogpinto/filament-auth-ui-enhancer",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/diogogpinto/filament-auth-ui-enhancer.git",
+                "reference": "e30109798c9e116aa5994087930bc815d2e302b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/diogogpinto/filament-auth-ui-enhancer/zipball/e30109798c9e116aa5994087930bc815d2e302b6",
+                "reference": "e30109798c9e116aa5994087930bc815d2e302b6",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.1",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "AuthUIEnhancer": "DiogoGPinto\\AuthUIEnhancer\\Facades\\AuthUIEnhancer"
+                    },
+                    "providers": [
+                        "DiogoGPinto\\AuthUIEnhancer\\AuthUIEnhancerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DiogoGPinto\\AuthUIEnhancer\\": "src/",
+                    "DiogoGPinto\\AuthUIEnhancer\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Diogo Pinto",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This Filament plugin empowers you to transform your auth pages with ease, allowing you to make them truly stand out. It offers a flexible alternative to the default auth pages in the Filament Panels package.",
+            "homepage": "https://github.com/diogogpinto/filament-auth-ui-enhancer",
+            "keywords": [
+                "diogogpinto",
+                "filament",
+                "filament-auth-ui-enhancer",
+                "filament-plugin",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/diogogpinto/filament-auth-ui-enhancer/issues",
+                "source": "https://github.com/diogogpinto/filament-auth-ui-enhancer"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/diogogpinto",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-10-22T15:59:50+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -2192,6 +2271,150 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "intervention/gif",
+            "version": "4.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/gif.git",
+                "reference": "5999eac6a39aa760fb803bc809e8909ee67b451a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/gif/zipball/5999eac6a39aa760fb803bc809e8909ee67b451a",
+                "reference": "5999eac6a39aa760fb803bc809e8909ee67b451a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.0 || ^11.0  || ^12.0",
+                "slevomat/coding-standard": "~8.0",
+                "squizlabs/php_codesniffer": "^3.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Gif\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "Native PHP GIF Encoder/Decoder",
+            "homepage": "https://github.com/intervention/gif",
+            "keywords": [
+                "animation",
+                "gd",
+                "gif",
+                "image"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/gif/issues",
+                "source": "https://github.com/Intervention/gif/tree/4.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/interventionphp",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2025-03-29T07:46:21+00:00"
+        },
+        {
+            "name": "intervention/image",
+            "version": "3.11.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "ebbb711871fb261c064cf4c422f5f3c124fe1842"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/ebbb711871fb261c064cf4c422f5f3c124fe1842",
+                "reference": "ebbb711871fb261c064cf4c422f5f3c124fe1842",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "intervention/gif": "^4.2",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0",
+                "slevomat/coding-standard": "~8.0",
+                "squizlabs/php_codesniffer": "^3.8"
+            },
+            "suggest": {
+                "ext-exif": "Recommended to be able to read EXIF data properly."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "PHP image manipulation",
+            "homepage": "https://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "resize",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/3.11.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/interventionphp",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2025-02-27T13:08:55+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -5341,6 +5564,82 @@
                 }
             ],
             "time": "2024-06-22T23:04:52+00:00"
+        },
+        {
+            "name": "swisnl/filament-backgrounds",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swisnl/filament-backgrounds.git",
+                "reference": "0841c391f51a6089a569c22647ee77ae1cdd0eea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swisnl/filament-backgrounds/zipball/0841c391f51a6089a569c22647ee77ae1cdd0eea",
+                "reference": "0841c391f51a6089a569c22647ee77ae1cdd0eea",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0.100",
+                "illuminate/contracts": "^10.21|^11.0|^12.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9|^3.0",
+                "laravel/pint": "^1.13",
+                "nunomaduro/collision": "^7.10|^8.1",
+                "orchestra/testbench": "^8.15|^9.0|^10.0",
+                "pestphp/pest": "^2.25|^3.7",
+                "pestphp/pest-plugin-arch": "^2.4|^3.0",
+                "pestphp/pest-plugin-laravel": "^2.2|^3.1",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^1.2|^2.0",
+                "phpstan/phpstan-phpunit": "^1.4|^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Swis\\Filament\\Backgrounds\\FilamentBackgroundsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Swis\\Filament\\Backgrounds\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jasper Zonneveld",
+                    "email": "jasper@swis.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Beautiful backgrounds for Filament auth pages",
+            "homepage": "https://github.com/swisnl/filament-backgrounds",
+            "keywords": [
+                "backgrounds",
+                "filament",
+                "laravel",
+                "swisnl"
+            ],
+            "support": {
+                "issues": "https://github.com/swisnl/filament-backgrounds/issues",
+                "source": "https://github.com/swisnl/filament-backgrounds"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/swisnl",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-25T09:16:21+00:00"
         },
         {
             "name": "symfony/clock",
@@ -10266,12 +10565,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

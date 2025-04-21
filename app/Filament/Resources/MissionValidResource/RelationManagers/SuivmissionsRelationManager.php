@@ -43,9 +43,9 @@ class SuivmissionsRelationManager extends RelationManager
                         }
 
                         // Fetch points related to the mission
-                        return \App\Models\Point::where('mission_id', $missionId)
+                        /*return \App\Models\Point::where('mission_id', $missionId)
                             ->pluck('title', 'id')
-                            ->toArray();
+                            ->toArray();*/
                     })
                     ->reactive() // Ensures updates when mission_id changes
                     ->searchable(),

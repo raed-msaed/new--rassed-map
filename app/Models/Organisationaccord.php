@@ -12,8 +12,8 @@ class Organisationaccord extends Model
 
     protected $guarded = [];
 
-    public function mission(): HasMany
+    public function demande(): HasMany
     {
-        return $this->hasMany(Mission::class);
+        return $this->hasMany(Demande::class);
     }
 }

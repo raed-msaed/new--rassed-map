@@ -2,17 +2,21 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Admin\Pages\Auth\Login;
 use App\Filament\Resources\HistoryLogResource;
 use App\Filament\Resources\MissionValidResource;
 use App\Filament\Widgets\SuivMissionWidget;
 use App\Models\Icon;
 use App\Models\Mission;
 use App\Models\Point;
+use App\Models\Suiv_mission;
 use App\Models\Suivmission;
 use App\Observers\HistoryObserver;
 use App\Observers\MissionObserver;
 use App\Observers\PointObserver;
 use App\Observers\SuivmissionObserver;
+use App\Providers\MyImageProvider;
+use DiogoGPinto\AuthUIEnhancer\AuthUIEnhancerPlugin;
 use Filament\Facades\Filament;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
@@ -26,6 +30,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -33,7 +38,11 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -44,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
             ->registration()
             ->profile()
             ->font(
@@ -52,18 +61,28 @@ class AdminPanelProvider extends PanelProvider
                 url: asset('css/filament/filament/fonts.css'),
                 provider: LocalFontProvider::class,
             )
-            ->brandLogo(asset('images/logo.png'))
-            ->brandLogoHeight('4rem')
-            ->favicon(asset('images/logo.png'))
             ->maxContentWidth(MaxWidth::Full)
             ->sidebarFullyCollapsibleOnDesktop()
+            ->plugins([
+                FilamentBackgroundsPlugin::make()
+                    ->imageProvider(MyImageProvider::make()),  // Utilisation du provider personnalisé
+            ])
+
+            ->theme(asset('css/filament/admin/theme.css'))
+            // ->colors([
+            //     'primary' => Color::Indigo,
+            //     'danger' => Color::Red,
+            //     'gray' => Color::Slate,
+            //     'info' => Color::Blue,
+            //     'success' => Color::Emerald,
+            //     'warning' => Color::Orange,
+            // ])
+            // ->navbarBackground('bg-blue-600')
             ->colors([
-                'primary' => Color::Indigo,
-                'danger' => Color::Red,
-                'gray' => Color::Slate,
-                'info' => Color::Blue,
-                'success' => Color::Emerald,
-                'warning' => Color::Orange,
+                //'primary' => '#FF5733',
+                'primary' => '#25c0c0',
+                'secondary' => Color::Blue,
+                'danger' => Color::Rose,
             ])
             ->navigationGroups([
                 'إدارة الطلبات',
@@ -72,9 +91,9 @@ class AdminPanelProvider extends PanelProvider
                 'تسيير',
                 'تعريف المنظومة'
             ])
-            ->brandName('رصد جيوفضائية')
-            ->brandLogo(asset('images/logo.png'))
-            ->brandLogoHeight('3.5rem')
+            ->brandName(' رصد بالطائرات بدون طيار')
+            ->brandLogo(asset('images/Zazzle - Digital Business Card - Front (2).png'))
+            ->brandLogoHeight('4rem')
             ->favicon(asset('images/logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -101,17 +120,24 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
-            ]);
+            ])
+
+            ->renderHook(PanelsRenderHook::TOPBAR_START, function () {
+                return Blade::render('<div style="background-color: #ffff;color: #0118D8;padding: 5px 20px;text-align: center;border-bottom:2px solid ;font-size: 36px;margin: 0;font-weight: bold;">{{ $text }}</div>', [
+                    'text' => ' رصد بالطائرات بدون طيار',
+                ]);
+            });
     }
 
     public function boot()
     {
+        App::setLocale('ar');
         Filament::registerResources([
             MissionValidResource::class,
         ]);
-        Mission::observe(MissionObserver::class);
-        Suivmission::observe(SuivmissionObserver::class);
-        Point::observe(PointObserver::class);
+        // Mission::observe(MissionObserver::class);
+        Suiv_mission::observe(SuivmissionObserver::class);
+        // Point::observe(PointObserver::class);
     }
     protected $listen = [
         \App\Events\ModelChanged::class => [
